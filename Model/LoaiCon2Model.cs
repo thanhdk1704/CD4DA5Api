@@ -4,10 +4,11 @@ using System.Text;
 
 namespace Model
 {
-    class LoaiModel
+    class LoaiCon2Model
     {
-        public int MaLoai;
+        public string MaLoai;
         public string TenLoai;
+        public string MaLoaiCha;
         public string MoTa;
         public string GhiChu;
         public string Link;
