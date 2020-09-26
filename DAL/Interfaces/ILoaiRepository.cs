@@ -7,6 +7,7 @@ namespace DAL
 {
     public partial interface ILoaiRepository
     {
-        bool Create(ItemModel model);
+        bool Create(LoaiModel model);
+        List<LoaiModel> GetDataAll();
     }
 }

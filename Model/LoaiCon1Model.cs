@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Model
 {
-    class LoaiCon1Model
+    public class LoaiCon1Model
     {
         public string MaLoai;
         public string TenLoai;

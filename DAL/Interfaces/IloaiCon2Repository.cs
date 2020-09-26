@@ -7,5 +7,6 @@ namespace DAL.Interfaces
     public partial interface IloaiCon2Repository
     {
         bool Create(ItemModel model);
+        List<LoaiCon2Model> GetDataAll();
     }
 }
