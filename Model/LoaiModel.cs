@@ -6,12 +6,18 @@ namespace Model
 {
     public class LoaiModel
     {
-        public int MaLoai;
-        public string TenLoai;
-        public string MoTa;
-        public string GhiChu;
-        public string Link;
-        public int? Removed;
-        public int? Displayed;
+        public int MaLoai { get; set; }
+
+        public string TenLoai { get; set; }
+
+        public string MoTa { get; set; }
+
+        public string GhiChu { get; set; }
+
+        public string Link { get; set; }
+
+        public int? Removed { get; set; }
+
+        public int? Displayed { get; set; }
     }
 }

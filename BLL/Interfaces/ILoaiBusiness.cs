@@ -5,7 +5,7 @@ using Model;
 
 namespace BLL
 {
-    interface ILoaiBusiness
+    public partial interface ILoaiBusiness
     {
         List<LoaiModel> GetLoais();
     }
