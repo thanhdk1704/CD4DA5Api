@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace DAL.Interfaces
+namespace BLL
 {
-    public partial interface IDiaChiRepository
+    public partial class LoaiBusiness
     {
 
     }

@@ -3,11 +3,10 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace DAL
+namespace DAL.Interfaces
 {
     public partial interface ILoaiRepository
     {
-        bool Create(LoaiModel model);
         List<LoaiModel> GetDataAll();
     }
 }

@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using DAL.Interfaces;
 using Model;
 
-namespace DAL
+namespace BLL
 {
-    public partial class DiaChiRepository:IDiaChiRepository
+    interface ILoaiBusiness
     {
+        List<LoaiModel> GetLoais();
     }
 }

@@ -2,10 +2,9 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-
 namespace DAL
 {
-    interface LoaiCon2Repository:IloaiCon2Repository
+    public partial class LoaiCon2Repository:IloaiCon2Repository
     {
     }
 }
