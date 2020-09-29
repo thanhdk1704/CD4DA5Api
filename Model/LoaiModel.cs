@@ -19,5 +19,6 @@ namespace Model
         public int? Removed { get; set; }
 
         public int? Displayed { get; set; }
+        public List<LoaiCon1Model> loaicon { get; set; }
     }
 }

@@ -19,7 +19,7 @@ namespace DAL
         {
             string msgError = "";
             try
-            {
+              {
                 var result = _dbHelper.ExecuteScalarSProcedureWithTransaction(out msgError, "sp_item_create",
                 "@item_id", model.item_id,
                 "@item_group_id", model.item_group_id,

@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Text;
 using Model;
-
-namespace DAL
+using DAL;
+using DAL.Interfaces;
+namespace BLL
 {
-    public partial interface ILoaiCon1Repository
+    public partial interface ILoaiCon1Business
     {
-       
         List<LoaiCon1Model> GetLoaiCon();
     }
 }
