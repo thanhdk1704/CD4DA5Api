@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Model
+namespace DAL
 {
-    public class HoaDonXuatModel
+    public partial interface ISanPhamRepository
     {
     }
 }

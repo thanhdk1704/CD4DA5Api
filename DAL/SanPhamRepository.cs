@@ -5,7 +5,11 @@ using Model;
 
 namespace DAL
 {
-    public partial interface SanPhamRepository
+    public partial interface SanPhamRepository:ISanPhamRepository
     {
+        public List<SanPhamModel> GetDonHang()
+        {
+            return null;
+        }
     }
 }

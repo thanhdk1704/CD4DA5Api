@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Model
+namespace DAL
 {
-    class SanPham
+    public partial interface INhaCungCapRepository
     {
     }
 }

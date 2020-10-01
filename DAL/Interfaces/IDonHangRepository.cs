@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Model;
 
-namespace Model
+namespace DAL
 {
-    public class HoaDonXuatModel
+    public partial interface IDonHangRepository
     {
     }
 }

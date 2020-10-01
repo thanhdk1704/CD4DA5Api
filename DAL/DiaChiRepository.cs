@@ -7,5 +7,9 @@ namespace DAL
 {
     public partial class DiaChiRepository:IDiaChiRepository
     {
+        public List<DiaChiModel> GetDonHang()
+        {
+            return null;
+        }
     }
 }

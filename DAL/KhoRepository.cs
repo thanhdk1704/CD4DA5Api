@@ -5,9 +5,9 @@ using System.Text;
 
 namespace DAL
 {
-    public partial class KhachHangRepository:IKhachHangRepository
+    public partial interface KhoRepository:IKhoRepository
     {
-        public List<KhachHangModel> GetAll()
+        public List<KhoModel> GetDonHang()
         {
             return null;
         }
