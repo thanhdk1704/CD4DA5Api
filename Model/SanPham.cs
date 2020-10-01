@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Model;
 
-namespace DAL
+namespace Model
 {
-    public partial class DiaChiRepository:IDiaChiRepository
+    class SanPham
     {
     }
 }
