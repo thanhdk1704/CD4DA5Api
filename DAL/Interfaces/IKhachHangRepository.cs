@@ -7,6 +7,6 @@ namespace DAL
 {
    public interface IKhachHangRepository
     {
-        List<KhachHangModel> GetAll();
+        List<KhachHangModel> GetKh();
     }
 }
