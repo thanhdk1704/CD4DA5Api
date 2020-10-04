@@ -5,7 +5,7 @@ using System.Text;
 
 namespace DAL
 {
-    interface HangSanXuatRepository:IHangSanXuatRepository
+   public interface HangSanXuatRepository:IHangSanXuatRepository
     {
         public List<HangSanXuatModel> GetDonHang()
         {
