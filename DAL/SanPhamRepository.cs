@@ -7,7 +7,7 @@ namespace DAL
 {
     public partial interface SanPhamRepository:ISanPhamRepository
     {
-        public List<SanPhamModel> GetDonHang()
+        public List<SanPhamModel> GetSanPhams()
         {
             return null;
         }

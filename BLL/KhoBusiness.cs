@@ -1,10 +1,11 @@
-﻿using System;
+﻿using BLL.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace BLL
 {
-    public partial class KhoBusiness
+    public partial class KhoBusiness:IKhoBusiness
     {
     }
 }

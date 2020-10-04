@@ -4,7 +4,7 @@ using System.Text;
 
 namespace BLL
 {
-    interface INhaCungCapBusiness
+    public partial interface INhaCungCapBusiness
     {
     }
 }

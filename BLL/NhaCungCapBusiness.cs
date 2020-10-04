@@ -4,7 +4,7 @@ using System.Text;
 
 namespace BLL
 {
-    public partial class NhaCungCapBusiness
+    public partial class NhaCungCapBusiness:INhaCungCapBusiness
     {
     }
 }

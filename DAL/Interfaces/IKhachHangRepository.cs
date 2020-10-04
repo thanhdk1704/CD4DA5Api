@@ -8,5 +8,7 @@ namespace DAL
    public interface IKhachHangRepository
     {
         List<KhachHangModel> GetKh();
+        List<KhachHangModel> getbyid(string id);
+        List<DiaChiModel> GeDiachi(string id);
     }
 }

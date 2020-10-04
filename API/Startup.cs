@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BLL;
+using BLL.Interfaces;
 using DAL;
 using DAL.Helper;
 using Microsoft.AspNetCore.Builder;
@@ -46,17 +47,8 @@ namespace API
             services.AddTransient<ICustomerBusiness, CustomerBusiness>();
             services.AddTransient<ILoaiRepository, LoaiRepository>();
             services.AddTransient<ILoaiBusiness, LoaiBusiness>();
-            services.AddTransient<ILoaiCon1Repository, LoaiCon1Repository>();
-            services.AddTransient<IloaiCon2Repository, LoaiCon2Repository>();
             services.AddTransient<IKhachHangRepository, KhachHangRepository>();
-            services.AddTransient<ISanPhamRepository, SanPhamRepository>();
-            services.AddTransient<INhaCungCapRepository, NhaCungCapRepository>();
-            services.AddTransient<INhanVienRepository, NhanVienRepository>();
-            services.AddTransient<IDiaChiRepository, DiaChiRepository>();
-            services.AddTransient<IHangSanXuatRepository, HangSanXuatRepository>();
-            services.AddTransient<IKhoRepository, KhoRepository>();
-            services.AddTransient<IDonHangRepository, IDonHangRepository>();
-            services.AddTransient<IHangSanXuatRepository, HangSanXuatRepository>();
+            services.AddTransient<IKhachHangBusiness, KhachHangBusiness>();
 
 
         }
