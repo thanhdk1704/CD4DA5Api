@@ -14,7 +14,8 @@ namespace Model
         public string Link { get; set; }
         public int? Removed { get; set; }
         public int? Displayed { get; set; }
-         public List<SanPhamModel> children { get; set; }
+
+
 
     }
 }

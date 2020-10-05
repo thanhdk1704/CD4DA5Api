@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Text;
 using Model;
 using DAL;
+using System.Linq;
+
 namespace BLL
 {
     public partial class LoaiBusiness : ILoaiBusiness
@@ -43,5 +45,21 @@ namespace BLL
 
             return loais;
         }
+        public List<LoaiModel> getAllWithChildren()
+        {
+            var loais = _res.GetDataAll();
+            var loai1 = _res.GetLoai1();
+            var loai2 = _res.GetLoai2();
+            foreach (var item in loais)
+            {
+               item.children=loai1.Where(s=>s.MaLoaiCha==item.MaLoai).ToList();
+            }
+            foreach (var item in loai1)
+            {
+                item.children = loai2.Where(s => s.MaLoaiCha == item.MaLoai).ToList();
+            }
+            return loais;
+        }
+        
     }
 }

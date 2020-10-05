@@ -14,11 +14,12 @@ namespace Model
 
         public string GhiChu { get; set; }
 
-        public string Link { get; set; }
+        public string link { get; set; }
 
-        public int? Removed { get; set; }
+        public int? removed { get; set; }
 
-        public int? Displayed { get; set; }
-        public List<LoaiCon1Model> loaicon { get; set; }
+        public int? displayed { get; set; }
+        public List<LoaiCon1Model> children { get; set; }
+
     }
 }

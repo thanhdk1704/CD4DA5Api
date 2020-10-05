@@ -20,9 +20,21 @@ namespace API.Controllers.Server
         }
         [Route("khach-hang")]
         [HttpGet]
-        public List<KhachHangModel> allkhach()
+        public List<KhachHangModel> getallkhach()
         {
             return item.AllCtm();
+        }
+        [Route("khach-hang/{id}")]
+        [HttpGet]
+        public List<KhachHangModel> getkhachbyid(string id)
+        {
+            return item.Cusbyid(id);
+        }
+        [Route("khach-hang/dia-chi/{id}")]
+        [HttpGet]
+        public List<DiaChiModel> Diachibykh(string id)
+        {
+            return item.GetAddress(id);
         }
     }
 }

@@ -18,6 +18,14 @@ namespace BLL
         {
             return _res.GetKh();
         }
+        public List<KhachHangModel> Cusbyid(string id)
+        {
+            return _res.getbyid(id);
+        }
+        public List<DiaChiModel> GetAddress(string id)
+        {
+            return _res.GeDiachi(id);
+        }
 
     }
 }

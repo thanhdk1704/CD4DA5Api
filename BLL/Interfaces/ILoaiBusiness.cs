@@ -12,5 +12,6 @@ namespace BLL
         List<LoaiCon1Model> GetLoai1theoloai(int id);
         public List<LoaiCon2Model> GetLoai2();
         public List<LoaiCon2Model> GetLoai2theoloai(string id);
+        public List<LoaiModel> getAllWithChildren();
     }
 }
