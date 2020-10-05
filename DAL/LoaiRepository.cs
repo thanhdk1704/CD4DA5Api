@@ -88,6 +88,21 @@ namespace DAL
                 throw ex;
             }
         }
+        //public List<LoaiCon2Model> getbyid(string id)
+        //{
+        //    string msgError = "";
+        //    try
+        //    {
+        //        var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "getloai2id", "@id", id);
+        //        if (!string.IsNullOrEmpty(msgError))
+        //            throw new Exception(msgError);
+        //        return dt.ConvertTo<LoaiCon2Model>().ToList();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw ex;
+        //    }
+        //}
 
     }
 }

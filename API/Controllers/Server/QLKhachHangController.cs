@@ -26,7 +26,7 @@ namespace API.Controllers.Server
         }
         [Route("khach-hang/{id}")]
         [HttpGet]
-        public List<KhachHangModel> getkhachbyid(string id)
+        public KhachHangModel getkhachbyid(string id)
         {
             return item.Cusbyid(id);
         }
@@ -35,6 +35,12 @@ namespace API.Controllers.Server
         public List<DiaChiModel> Diachibykh(string id)
         {
             return item.GetAddress(id);
+        }
+        [Route("khach-hang/dia-chi/")]
+        [HttpGet]
+        public List<KhachHangModel>KhWDiaChi()
+        {
+            return item.KhwDiaChi();
         }
     }
 }

@@ -9,7 +9,8 @@ namespace BLL.Interfaces
     {
 
         public List<KhachHangModel> AllCtm();
-        public List<KhachHangModel> Cusbyid(string id);
+        public KhachHangModel Cusbyid(string id);
         public List<DiaChiModel> GetAddress(string id);
+        public List<KhachHangModel> KhwDiaChi();
     }
 }

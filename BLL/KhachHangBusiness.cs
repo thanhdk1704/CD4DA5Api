@@ -3,6 +3,7 @@ using DAL;
 using Model;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace BLL
@@ -18,9 +19,20 @@ namespace BLL
         {
             return _res.GetKh();
         }
-        public List<KhachHangModel> Cusbyid(string id)
+        public List<KhachHangModel> KhwDiaChi()
         {
-            return _res.getbyid(id);
+            var kh = _res.GetKh();
+            foreach(var item in kh)
+            {
+                item.dsdiachi = _res.GeDiachi(item.MaKhachHang);
+            }
+            return kh;
+        }
+        public KhachHangModel Cusbyid(string id)
+        {
+            var kh = _res.getbyid(id).FirstOrDefault();
+            kh.dsdiachi = _res.GeDiachi(id);
+            return kh;
         }
         public List<DiaChiModel> GetAddress(string id)
         {
