@@ -6,7 +6,7 @@ namespace Model
 {
     public class HangSanXuatModel
     {
-        public string MaHangSX {get;set;}
+      public string MaHangSX {get;set;}
       public string TenHang {get;set;}
       public string MaLoai {get;set;}
       public string GhiChu {get;set;}

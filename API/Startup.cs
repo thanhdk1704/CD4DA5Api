@@ -49,6 +49,8 @@ namespace API
             services.AddTransient<ILoaiBusiness, LoaiBusiness>();
             services.AddTransient<IKhachHangRepository, KhachHangRepository>();
             services.AddTransient<IKhachHangBusiness, KhachHangBusiness>();
+            services.AddTransient<ISanPhamRepository, SanPhamRepository>();
+            services.AddTransient<ISanPhamBusiness, SanPhamBusiness>();
 
 
         }
