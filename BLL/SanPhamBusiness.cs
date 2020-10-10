@@ -18,5 +18,9 @@ namespace BLL
         {
             return isp.GetSanPhams();
         }
+        public dynamic getspbyshop(string mashop) 
+        { 
+            return isp.Getspbyshop(mashop); 
+        }
     }
 }

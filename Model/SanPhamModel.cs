@@ -14,5 +14,7 @@ namespace Model
       public string Link {get;set;}
       public string Removed {get;set;}
       public string Displayed {get;set;}
+      public int giahientai { get; set; }
+      public List<GiaBanModel> dsgiaban { get; set; }
     }
 }

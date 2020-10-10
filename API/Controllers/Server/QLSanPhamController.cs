@@ -23,5 +23,10 @@ namespace API.Controllers.Server
         {
             return isp.all();
         }
+        [Route("all-by-shop/{id}")]
+        public dynamic getspbyshop(string id)
+        {
+            return isp.getspbyshop(id);
+        }
     }
 }

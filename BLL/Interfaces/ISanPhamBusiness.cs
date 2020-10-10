@@ -8,5 +8,6 @@ namespace BLL.Interfaces
     public partial interface ISanPhamBusiness
     {
         List<SanPhamModel> all();
+        dynamic getspbyshop(string mashop);
     }
 }
