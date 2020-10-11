@@ -12,5 +12,6 @@ namespace BLL.Interfaces
         public KhachHangModel Cusbyid(string id);
         public List<DiaChiModel> GetAddress(string id);
         public List<KhachHangModel> KhwDiaChi();
+        List<KhachHangModel> Getfulldetails();
     }
 }

@@ -14,7 +14,11 @@ namespace Model
       public string Link {get;set;}
       public string Removed {get;set;}
       public string Displayed {get;set;}
-      public int giahientai { get; set; }
-      public List<GiaBanModel> dsgiaban { get; set; }
+      
+        public string Anh { get; set; }
+        public string ThongTin { get; set; }
+        public KhoModel kho { get; set; }
+        public List<GiaBanModel> dsgiaban { get; set; }
+        public GiaBanModel giahientai { get; set; }
     }
 }

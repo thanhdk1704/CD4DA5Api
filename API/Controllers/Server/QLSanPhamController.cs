@@ -23,10 +23,48 @@ namespace API.Controllers.Server
         {
             return isp.all();
         }
+
+        [Route("detail/{id}")]
+        public SanPhamModel Chitietsanpham(string id)
+        {
+            return isp.Chitietsanpham(id);
+        }
         [Route("all-by-shop/{id}")]
         public dynamic getspbyshop(string id)
         {
             return isp.getspbyshop(id);
+        }
+        [Route("all-with-details")]
+        public List<SanPhamModel> getfulldetails()
+        {
+            return isp.getspwithfulldetail();
+        }
+
+        [Route("all-pagedlist")]
+        public ResponseModel Phantrang([FromBody] Dictionary<string, object> formData)
+        {
+            var response = new ResponseModel();
+            try
+            {
+                var page = int.Parse(formData["page"].ToString());
+                var pageSize = int.Parse(formData["pageSize"].ToString());
+                long total = 0;
+                var data = isp.phantrang(page, pageSize, out total);
+                response.TotalItems = total;
+                response.Data = data;
+                response.Page = page;
+                response.PageSize = pageSize;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            return response;
+        }
+        [Route("all-in-loai-2/{id}")]
+        public IEnumerable<SanPhamModel> SanPhamtheoloaicon2(string id)
+        {
+            return isp.SanphamtheoLoaiCon2(id);
         }
     }
 }

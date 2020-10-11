@@ -36,11 +36,16 @@ namespace API.Controllers.Server
         {
             return item.GetAddress(id);
         }
-        [Route("khach-hang/dia-chi/")]
+        [Route("khach-hang/dia-chi")]
         [HttpGet]
         public List<KhachHangModel>KhWDiaChi()
         {
             return item.KhwDiaChi();
+        }
+        [Route("khach-hang/full")]
+        public List<KhachHangModel> Getfull()
+        {
+            return item.Getfulldetails();
         }
     }
 }

@@ -1,4 +1,6 @@
 ﻿using DAL.Helper;
+using Microsoft.EntityFrameworkCore.Internal;
+using Microsoft.EntityFrameworkCore.Migrations.Operations;
 using Model;
 using System;
 using System.Collections.Generic;
@@ -29,7 +31,7 @@ namespace DAL
                 throw ex;
             }
         }
-        public List<KhachHangModel> getbyid(string id)
+        public KhachHangModel getbyid(string id)
         {
             string msgError = "";
             try
@@ -37,7 +39,7 @@ namespace DAL
                 var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "getkhid","@id",id);
                 if (!string.IsNullOrEmpty(msgError))
                     throw new Exception(msgError);
-                return dt.ConvertTo<KhachHangModel>().ToList();
+                return dt.ConvertTo<KhachHangModel>().ToList().FirstOrDefault();
             }
             catch (Exception ex)
             {
@@ -53,6 +55,21 @@ namespace DAL
                 if (!string.IsNullOrEmpty(msgError))
                     throw new Exception(msgError);
                 return dt.ConvertTo<DiaChiModel>().ToList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public TaiKhoanModel GetTaiKhoan(string makh)
+        {
+            string msgError = "";
+            try
+            {
+                var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "gettaikhoanbykh", "@makh", makh);
+                if (!string.IsNullOrEmpty(msgError))
+                    throw new Exception(msgError);
+                return dt.ConvertTo<TaiKhoanModel>().ToList().FirstOrDefault();
             }
             catch (Exception ex)
             {

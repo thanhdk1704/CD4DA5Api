@@ -30,7 +30,7 @@ namespace BLL
         }
         public KhachHangModel Cusbyid(string id)
         {
-            var kh = _res.getbyid(id).FirstOrDefault();
+            var kh = _res.getbyid(id);
             kh.dsdiachi = _res.GeDiachi(id);
             return kh;
         }
@@ -38,6 +38,15 @@ namespace BLL
         {
             return _res.GeDiachi(id);
         }
-
+        public List<KhachHangModel> Getfulldetails()
+        {
+            var kh = _res.GetKh();
+            foreach (var item in kh)
+            {
+                item.dsdiachi = _res.GeDiachi(item.MaKhachHang);
+                item.tk = _res.GetTaiKhoan(item.MaKhachHang);
+            }
+            return kh;
+        }
     }
 }
