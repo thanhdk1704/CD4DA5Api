@@ -14,5 +14,6 @@ namespace BLL.Interfaces
         List<SanPhamModel> getspwithfulldetail();
         List<SanPhamModel> phantrang(int index, int size, out long total);
         List<SanPhamModel> SanphamtheoLoaiCon2(string maloai);
+        List<SanPhamModel> SPtheoKhoangGia(int min, int max);
     }
 }

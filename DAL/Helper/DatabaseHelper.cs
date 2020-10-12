@@ -682,7 +682,9 @@ namespace DAL.Helper
                         {
                             transaction.Rollback();
                         }
-                        catch (Exception ex) { }
+                        catch (Exception ex) {
+                  
+                        }
                     }
                     finally
                     {

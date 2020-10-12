@@ -79,5 +79,16 @@ namespace BLL
             }
             return kq;
         }
+        public List<SanPhamModel> SPtheoKhoangGia(int min,int max)
+        {
+            var kq = isp.SPtheoKhoangGia(min, max);
+            foreach(var item in kq)
+            {
+                item.dsgiaban = isp.GetGiaBans(item.MaSanPham);
+                item.giahientai = isp.Getgiahientai(item.MaSanPham);
+                item.kho = isp.Getkhobysp(item.MaSanPham);
+            }
+            return kq;
+        }
     }
 }

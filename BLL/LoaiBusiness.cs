@@ -13,6 +13,7 @@ namespace BLL
         public LoaiBusiness(ILoaiRepository ItemGroupRes)
         {
             _res = ItemGroupRes;
+      
         }
 
         public List<LoaiModel> GetLoais()

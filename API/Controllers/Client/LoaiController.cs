@@ -55,5 +55,9 @@ namespace API.Controllers.Client
         {
             return loai.getAllWithChildren();
         }
+        public IEnumerable<LoaiModel> getchildrenandsanPham()
+        {
+            return null;
+        }
     }
 }

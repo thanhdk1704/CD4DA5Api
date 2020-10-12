@@ -66,5 +66,9 @@ namespace API.Controllers.Server
         {
             return isp.SanphamtheoLoaiCon2(id);
         }
+        [Route("{min}/{max}")]
+        public IEnumerable<SanPhamModel> SanPhamtheoKhoangGia(int min, int max) {
+            return isp.SPtheoKhoangGia(min, max);
+        }
     }
 }
