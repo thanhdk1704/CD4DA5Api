@@ -50,7 +50,7 @@ namespace DAL
             string msgError = "";
             try
             {
-                var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "getspid","@id",id);
+                var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "getspbylink","@id",id);
                 if (!string.IsNullOrEmpty(msgError))
                     throw new Exception(msgError);
                 return dt.ConvertTo<SanPhamModel>().FirstOrDefault();
@@ -159,7 +159,22 @@ namespace DAL
             string msgError = "";
             try
             {
-                var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "giabantheokhoang", "@min", min,"@max",max,"@masp");
+                var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "giabantheokhoang", "@min", min,"@max",max);
+                if (!string.IsNullOrEmpty(msgError))
+                    throw new Exception(msgError);
+                return dt.ConvertTo<SanPhamModel>().ToList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public List<SanPhamModel> GetCungLoai(string masp)
+        {
+            string msgError = "";
+            try
+            {
+                var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "sptuongtu", "@masp", masp);
                 if (!string.IsNullOrEmpty(msgError))
                     throw new Exception(msgError);
                 return dt.ConvertTo<SanPhamModel>().ToList();

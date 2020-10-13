@@ -24,10 +24,10 @@ namespace API.Controllers.Server
             return isp.all();
         }
 
-        [Route("detail/{id}")]
-        public SanPhamModel Chitietsanpham(string id)
+        [Route("detail/{link}")]
+        public SanPhamModel Chitietsanpham(string link)
         {
-            return isp.Chitietsanpham(id);
+            return isp.Chitietsanpham(link); ;
         }
         [Route("all-by-shop/{id}")]
         public dynamic getspbyshop(string id)
@@ -69,6 +69,11 @@ namespace API.Controllers.Server
         [Route("{min}/{max}")]
         public IEnumerable<SanPhamModel> SanPhamtheoKhoangGia(int min, int max) {
             return isp.SPtheoKhoangGia(min, max);
+        }
+        [Route("tuong-tu/{id}")]
+        public IEnumerable<SanPhamModel> TuongTu(string id)
+        {
+            return isp.SPtuongtu(id);
         }
     }
 }

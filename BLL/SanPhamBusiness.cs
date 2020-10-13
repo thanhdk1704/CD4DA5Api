@@ -18,12 +18,14 @@ namespace BLL
         {
             return isp.GetSanPhams();
         } 
-        public SanPhamModel Chitietsanpham(string id)
+        public SanPhamModel Chitietsanpham(string link)
         {
-            var kq = isp.GetSPbyID(id);
+            var kq = isp.GetSPbyID(link);
+            if (kq != null) { 
             kq.dsgiaban = isp.GetGiaBans(kq.MaSanPham);
             kq.giahientai = isp.Getgiahientai(kq.MaSanPham);
             kq.kho = isp.Getkhobysp(kq.MaSanPham);
+            }
             return kq;
         }
         public dynamic getspbyshop(string mashop) 
@@ -87,6 +89,19 @@ namespace BLL
                 item.dsgiaban = isp.GetGiaBans(item.MaSanPham);
                 item.giahientai = isp.Getgiahientai(item.MaSanPham);
                 item.kho = isp.Getkhobysp(item.MaSanPham);
+            }
+            return kq;
+        }
+        public List<SanPhamModel> SPtuongtu(string maloai)
+        {
+            var kq = isp.GetCungLoai(maloai);
+            {
+                foreach (var item in kq)
+                {
+                    item.dsgiaban = isp.GetGiaBans(item.MaSanPham);
+                    item.giahientai = isp.Getgiahientai(item.MaSanPham);
+                    item.kho = isp.Getkhobysp(item.MaSanPham);
+                }
             }
             return kq;
         }

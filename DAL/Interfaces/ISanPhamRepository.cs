@@ -17,5 +17,6 @@ namespace DAL
         List<SanPhamModel> allwithpagedlist(int pageIndex, int pageSize, out long total);
         List<SanPhamModel> GetByLoai2(string maloai);
         List<SanPhamModel> SPtheoKhoangGia(int min, int max);
+        List<SanPhamModel> GetCungLoai(string masp);
     }
 }
