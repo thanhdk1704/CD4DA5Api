@@ -105,5 +105,45 @@ namespace BLL
             }
             return kq;
         }
+        public List<SanPhamModel> spbyloai1(string link)
+        {
+            var kq = isp.Getspbyloai1(link);
+            {
+                foreach (var item in kq)
+                {
+                    item.dsgiaban = isp.GetGiaBans(item.MaSanPham);
+                    item.giahientai = isp.Getgiahientai(item.MaSanPham);
+                    item.kho = isp.Getkhobysp(item.MaSanPham);
+                }
+            }
+            return kq;
+        }
+        public List<SanPhamModel> spbyloai(string link)
+        {
+            var kq = isp.Getspbyloai(link);
+            {
+                foreach (var item in kq)
+                {
+                    item.dsgiaban = isp.GetGiaBans(item.MaSanPham);
+                    item.giahientai = isp.Getgiahientai(item.MaSanPham);
+                    item.kho = isp.Getkhobysp(item.MaSanPham);
+                }
+            }
+            return kq;
+        }
+        public List<SanPhamModel> Getspbyshop(int index, int size,string link, out long total)
+        {
+            var kq = isp.Getspbyshop(index, size, link,out total);
+            {
+                foreach (var item in kq)
+                {
+                    item.dsgiaban = isp.GetGiaBans(item.MaSanPham);
+                    item.giahientai = isp.Getgiahientai(item.MaSanPham);
+                    item.kho = isp.Getkhobysp(item.MaSanPham);
+                    item.Total = total;
+                }
+            }
+            return kq;
+        }
     }
 }

@@ -18,5 +18,8 @@ namespace DAL
         List<SanPhamModel> GetByLoai2(string maloai);
         List<SanPhamModel> SPtheoKhoangGia(int min, int max);
         List<SanPhamModel> GetCungLoai(string masp);
+        List<SanPhamModel> Getspbyloai1(string link);
+        List<SanPhamModel> Getspbyloai(string link);
+        List<SanPhamModel> Getspbyshop(int pageIndex, int pageSize, string link, out long total);
     }
 }

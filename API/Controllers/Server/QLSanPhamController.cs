@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.Xml;
 using System.Threading.Tasks;
 using BLL.Interfaces;
 using Microsoft.AspNetCore.Http;
@@ -74,6 +75,24 @@ namespace API.Controllers.Server
         public IEnumerable<SanPhamModel> TuongTu(string id)
         {
             return isp.SPtuongtu(id);
+        }
+        [Route("all-in-loai-1/{id}")]
+        public IEnumerable<SanPhamModel> GetByloai1(string id)
+        {
+            return isp.spbyloai1(id);
+        }
+        [Route("all-in-loai/{id}")]
+        public IEnumerable<SanPhamModel> GetByloai(string id)
+        {
+            return isp.spbyloai(id);
+        }
+        [Route("get-by-shop/{link}/{index}/{size}")]
+        public IEnumerable<SanPhamModel> getspbyshop(int? index, int? size, string link, out long total)
+        {
+
+            index = (index < 1 || index == null) ? 1 : index;
+            size = (index < 1 || index == null) ? 10 : size;
+            return isp.Getspbyshop(index.Value, size.Value, link, out total);
         }
     }
 }

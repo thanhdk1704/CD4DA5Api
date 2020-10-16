@@ -16,5 +16,8 @@ namespace BLL.Interfaces
         List<SanPhamModel> SanphamtheoLoaiCon2(string maloai);
         List<SanPhamModel> SPtheoKhoangGia(int min, int max);
         List<SanPhamModel> SPtuongtu(string maloai);
+        List<SanPhamModel> spbyloai1(string link);
+        List<SanPhamModel> spbyloai(string link);
+        List<SanPhamModel> Getspbyshop(int index, int size, string link, out long total);
     }
 }
