@@ -145,5 +145,22 @@ namespace BLL
             }
             return kq;
         }
+        public List<SanPhamModel> Create(SanPhamModel spmoi)
+        {
+            return isp.Create(spmoi);
+        }
+        public List<KhoModel> ThemKho(string MaSanPham, string MaShop, int SoLuong, int GiaNhap)
+        {
+            return isp.AddKho(MaSanPham, MaShop,  SoLuong,  GiaNhap);
+        }
+        public List<GiaBanModel> ThemGiaBan(string MaSanPham,int Gia)
+        {
+            return isp.Addprice(MaSanPham,Gia);
+        }
+        public int delete(string masp)
+        {
+            return isp.Delete(masp);
+        }
     }
+    
 }

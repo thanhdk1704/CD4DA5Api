@@ -232,5 +232,79 @@ namespace DAL
                 throw ex;
             }
         }
+        public List<SanPhamModel> Create(SanPhamModel spmoi)
+        {
+            string msgError = "";
+            try
+            {
+                var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "themsp",
+                          "@MaLoai2", spmoi.MaLoai2,
+                          "@TenSanPham", spmoi.TenSanPham,
+                            "@MoTa", spmoi.MoTa,
+                            "@GhiChu", spmoi.GhiChu,
+                            "@Link", spmoi.Link,
+                            "@anh",spmoi.Anh);
+                if (!string.IsNullOrEmpty(msgError))
+                    throw new Exception(msgError);
+                return dt.ConvertTo<SanPhamModel>().ToList();
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public List<GiaBanModel> Addprice(string MaSanPham ,int Gia)
+        {
+            string msgError = "";
+            try
+            {
+                var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "themgiaban",
+                          "@MaSanPham", MaSanPham,
+                         "@Gia", Gia);
+                if (!string.IsNullOrEmpty(msgError))
+                    throw new Exception(msgError);
+                return dt.ConvertTo<GiaBanModel>().ToList();
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public List<KhoModel> AddKho(string MaSanPham,string MaShop,int SoLuong, int GiaNhap)
+        {
+            string msgError = "";
+            try
+            {
+                var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "themkho",
+                          "@MaSanPham", MaSanPham,
+                          "@MaShop",MaShop,"@SoLuong",SoLuong,
+                         "@GiaNhap", GiaNhap);
+                if (!string.IsNullOrEmpty(msgError))
+                    throw new Exception(msgError);
+                return dt.ConvertTo<KhoModel>().ToList();
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public int Delete(string masp)
+        {
+            string msgError = "";
+            try
+            {
+                var dt = _dbHelper.ExecuteScalarSProcedure(out msgError, "xoasp", "@masp", masp);
+                if (!string.IsNullOrEmpty(msgError))
+                    throw new Exception(msgError);
+                return Convert.ToInt32(dt);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

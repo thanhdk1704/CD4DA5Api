@@ -86,13 +86,40 @@ namespace API.Controllers.Server
         {
             return isp.spbyloai(id);
         }
-        [Route("get-by-shop/{link}/{index}/{size}")]
-        public IEnumerable<SanPhamModel> getspbyshop(int? index, int? size, string link, out long total)
+        [Route("get-by-shop/{index}/{size}/{link}")]
+        public IEnumerable<SanPhamModel> getspbyshop(int? index, int? size, string link)
         {
-
+            long total=9;
             index = (index < 1 || index == null) ? 1 : index;
             size = (index < 1 || index == null) ? 10 : size;
             return isp.Getspbyshop(index.Value, size.Value, link, out total);
+        }
+        [Route("them")]
+        [HttpPost]
+        public int create(SanPhamModel spmoi,string MaShop,int SLKho,int GiaNhap,int GiaBan)
+        {
+            if (GiaNhap > GiaBan) { 
+            var newpro= isp.Create(spmoi);
+            var sto = isp.ThemKho(spmoi.MaSanPham, MaShop, SLKho, GiaNhap);
+            var price = isp.ThemGiaBan(spmoi.MaSanPham, GiaBan);
+            if (newpro == null || newpro.ToArray() == null) return -1;
+            if (sto == null || sto.ToArray() == null) return -2;
+            if (price == null || price.ToArray() == null) return -3;
+            return 1;}
+            else return 0;
+
+        }
+        [Route("update")]
+        [HttpPut]
+        public void sua(string masp)
+        {
+
+        }
+        [Route("xoa/{id}")]
+        [HttpGet]
+        public int delete(string id)
+        {
+            return isp.delete(id);
         }
     }
 }

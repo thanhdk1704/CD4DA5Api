@@ -20,6 +20,6 @@ namespace Model
         public KhoModel kho { get; set; }
         public List<GiaBanModel> dsgiaban { get; set; }
         public GiaBanModel giahientai { get; set; }
-        public long? Total;
+        public long? Total { get; set; }
     }
 }
