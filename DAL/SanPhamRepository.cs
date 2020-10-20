@@ -138,15 +138,17 @@ namespace DAL
                 throw ex;
             }
         }
-        public List<SanPhamModel> GetByLoai2(string maloai)
+        public List<SanPhamModel> GetByLoai2(int pageIndex, int pageSize, string link, out long total)
         {
             string msgError = "";
+            total = 0;
             try
             {
                 var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "getsploai2",
-                    "@loai2",maloai);
+                    "@page_index", pageIndex, "@page_size", pageSize, "@loai2", link);
                 if (!string.IsNullOrEmpty(msgError))
                     throw new Exception(msgError);
+                if (dt.Rows.Count > 0) total = (long)dt.Rows[0]["RecordCount"];
                 return dt.ConvertTo<SanPhamModel>().ToList();
             }
             catch (Exception ex)
@@ -199,14 +201,17 @@ namespace DAL
                 throw ex;
             }
         }
-        public List<SanPhamModel> Getspbyloai(string link)
+        public List<SanPhamModel> Getspbyloai(int pageIndex, int pageSize, string link, out long total)
         {
             string msgError = "";
+            total = 0;
             try
             {
-                var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "getspbyloai", "@link", link);
+                var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "getsploai2",
+                    "@page_index", pageIndex, "@page_size", pageSize, "@link", link);
                 if (!string.IsNullOrEmpty(msgError))
                     throw new Exception(msgError);
+                if (dt.Rows.Count > 0) total = (long)dt.Rows[0]["RecordCount"];
                 return dt.ConvertTo<SanPhamModel>().ToList();
             }
             catch (Exception ex)

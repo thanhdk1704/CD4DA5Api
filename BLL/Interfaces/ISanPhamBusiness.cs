@@ -13,11 +13,11 @@ namespace BLL.Interfaces
         public List<SanPhamModel> xemlichsugia();
         List<SanPhamModel> getspwithfulldetail();
         List<SanPhamModel> phantrang(int index, int size, out long total);
-        List<SanPhamModel> SanphamtheoLoaiCon2(string maloai);
+        List<SanPhamModel> SanphamtheoLoaiCon2(int pageIndex, int pageSize, string link, out long total);
         List<SanPhamModel> SPtheoKhoangGia(int min, int max);
         List<SanPhamModel> SPtuongtu(string maloai);
         List<SanPhamModel> spbyloai1(string link);
-        List<SanPhamModel> spbyloai(string link);
+        List<SanPhamModel> spbyloai(int pageIndex, int pageSize, string link, out long total);
         List<SanPhamModel> Getspbyshop(int index, int size, string link, out long total);
         List<SanPhamModel> Create(SanPhamModel spmoi);
         int delete(string masp);

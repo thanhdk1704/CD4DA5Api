@@ -62,10 +62,16 @@ namespace API.Controllers.Server
             }
             return response;
         }
-        [Route("all-in-loai-2/{id}")]
-        public IEnumerable<SanPhamModel> SanPhamtheoloaicon2(string id)
+        [Route("all-in-loai-2/{pageIndex}/{pageSize}/{link}")]
+        public IEnumerable<SanPhamModel> SanPhamtheoloaicon2(int pageIndex,int pageSize,string link)
         {
-            return isp.SanphamtheoLoaiCon2(id);
+            long total = 0;
+            var kq= isp.SanphamtheoLoaiCon2(pageIndex,pageSize,link,out total);
+            foreach(var item in kq)
+            {
+                item.Total = total;
+            }
+            return kq;
         }
         [Route("{min}/{max}")]
         public IEnumerable<SanPhamModel> SanPhamtheoKhoangGia(int min, int max) {
@@ -81,10 +87,16 @@ namespace API.Controllers.Server
         {
             return isp.spbyloai1(id);
         }
-        [Route("all-in-loai/{id}")]
-        public IEnumerable<SanPhamModel> GetByloai(string id)
+        [Route("all-in-loai/{pageIndex}/{pageSize}/{link}")]
+        public IEnumerable<SanPhamModel> GetByloai(int pageIndex,int pageSize, string link)
         {
-            return isp.spbyloai(id);
+            long total = 0;
+            var kq = isp.spbyloai(pageIndex, pageSize, link, out total);
+            foreach (var item in kq)
+            {
+                item.Total = total;
+            }
+            return kq;
         }
         [Route("get-by-shop/{index}/{size}/{link}")]
         public IEnumerable<SanPhamModel> getspbyshop(int? index, int? size, string link)

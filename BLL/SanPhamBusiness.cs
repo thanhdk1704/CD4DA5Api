@@ -68,9 +68,9 @@ namespace BLL
             }
             return kq;
         }
-        public List<SanPhamModel> SanphamtheoLoaiCon2(string maloai)
+        public List<SanPhamModel> SanphamtheoLoaiCon2(int pageIndex,int pageSize,string link, out long total)
         {
-            var kq = isp.GetByLoai2(maloai);
+            var kq = isp.GetByLoai2(pageIndex,pageSize,link,out total);
             {
                 foreach (var item in kq)
                 {
@@ -118,9 +118,9 @@ namespace BLL
             }
             return kq;
         }
-        public List<SanPhamModel> spbyloai(string link)
+        public List<SanPhamModel> spbyloai(int pageIndex,int  pageSize, string link, out long total)
         {
-            var kq = isp.Getspbyloai(link);
+            var kq = isp.Getspbyloai(pageIndex,pageSize,link,out total);
             {
                 foreach (var item in kq)
                 {

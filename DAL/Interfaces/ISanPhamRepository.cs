@@ -15,11 +15,11 @@ namespace DAL
         GiaBanModel Getgiahientai(string masp);
         KhoModel Getkhobysp(string masp);
         List<SanPhamModel> allwithpagedlist(int pageIndex, int pageSize, out long total);
-        List<SanPhamModel> GetByLoai2(string maloai);
+        List<SanPhamModel> GetByLoai2(int pageIndex, int pageSize, string link, out long total);
         List<SanPhamModel> SPtheoKhoangGia(int min, int max);
         List<SanPhamModel> GetCungLoai(string masp);
         List<SanPhamModel> Getspbyloai1(string link);
-        List<SanPhamModel> Getspbyloai(string link);
+        List<SanPhamModel> Getspbyloai(int pageIndex, int pageSize, string link, out long total);
         List<SanPhamModel> Getspbyshop(int pageIndex, int pageSize, string link, out long total);
         List<SanPhamModel> Create(SanPhamModel spmoi);
         int Delete(string masp);

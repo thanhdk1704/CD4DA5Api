@@ -19,6 +19,7 @@ namespace Model
         public int? removed { get; set; }
 
         public int? displayed { get; set; }
+        public string anh { get; set; }
         public List<LoaiCon1Model> children { get; set; }
 
     }
