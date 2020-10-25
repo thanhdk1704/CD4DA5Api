@@ -14,14 +14,16 @@ namespace DAL
         {
             _dbHelper = dbHelper;
         }
-        public List<SanPhamModel> GetSanPhams()
+        public List<SanPhamModel> GetSanPhams(int page_index, int page_size, out long total)
         {
+            total = 0;
             string msgError = "";
             try
             {
-                var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "getsp");
+                var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "getsp", "@page_index",page_index,"@page_size",page_size);
                 if (!string.IsNullOrEmpty(msgError))
                     throw new Exception(msgError);
+                if (dt.Rows.Count > 0) total = (long)dt.Rows[0]["RecordCount"];
                 return dt.ConvertTo<SanPhamModel>().ToList();
             }
             catch (Exception ex)
@@ -29,16 +31,17 @@ namespace DAL
                 throw ex;
             }
         }
-        public dynamic Getspbyshop(string mashop)
+        public List<SanPhamModel> Getspbyshop(string mashop, int pageIndex, int pageSize, out long total)
         {
-
+            total = 0;
             string msgError = "";
             try
             {
-                var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "getspbyshop", "@mashop",mashop);
+                var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "getspbyshop", "@linkshop",mashop, "@page_index", pageIndex, "@page_size", pageSize);
                 if (!string.IsNullOrEmpty(msgError))
                     throw new Exception(msgError);
-                return dt.ConvertTo<dynamic>().ToList();
+                if (dt.Rows.Count > 0) total = (long)dt.Rows[0]["RecordCount"];
+                return dt.ConvertTo<SanPhamModel>().ToList();
             }
             catch (Exception ex)
             {
@@ -146,10 +149,56 @@ namespace DAL
             {
                 var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "getsploai2",
                     "@page_index", pageIndex, "@page_size", pageSize, "@loai2", link);
+                
                 if (!string.IsNullOrEmpty(msgError))
                     throw new Exception(msgError);
                 if (dt.Rows.Count > 0) total = (long)dt.Rows[0]["RecordCount"];
                 return dt.ConvertTo<SanPhamModel>().ToList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public LoaiModel getloaibySanPham(string masp)
+        {
+            string msgError = "";
+            try
+            {
+                var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "getloaibysp", "@masp", masp);
+                if (!string.IsNullOrEmpty(msgError))
+                    throw new Exception(msgError);
+                return dt.ConvertTo<LoaiModel>().ToList().FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public LoaiCon1Model getloai1bySanPham(string masp)
+        {
+            string msgError = "";
+            try
+            {
+                var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "getloai1bysp", "@masp", masp);
+                if (!string.IsNullOrEmpty(msgError))
+                    throw new Exception(msgError);
+                return dt.ConvertTo<LoaiCon1Model>().ToList().FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public LoaiCon2Model getloai2bySanPham(string masp)
+        {
+            string msgError = "";
+            try
+            {
+                var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "getloai2bysp", "@masp", masp);
+                if (!string.IsNullOrEmpty(msgError))
+                    throw new Exception(msgError);
+                return dt.ConvertTo<LoaiCon2Model>().ToList().FirstOrDefault();
             }
             catch (Exception ex)
             {

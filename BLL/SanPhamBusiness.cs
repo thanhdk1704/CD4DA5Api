@@ -14,10 +14,11 @@ namespace BLL
         {
             this.isp = isp;
         }
-        public List<SanPhamModel> all()
+        public List<SanPhamModel> all(int pageIndex, int pageSize, out long total)
         {
-            return isp.GetSanPhams();
+            return isp.GetSanPhams( pageIndex,  pageSize, out  total);
         } 
+
         public SanPhamModel Chitietsanpham(string link)
         {
             var kq = isp.GetSPbyID(link);
@@ -25,16 +26,31 @@ namespace BLL
             kq.dsgiaban = isp.GetGiaBans(kq.MaSanPham);
             kq.giahientai = isp.Getgiahientai(kq.MaSanPham);
             kq.kho = isp.Getkhobysp(kq.MaSanPham);
+                kq.danhmuc = isp.getloaibySanPham(kq.MaSanPham);
+                kq.loaicon1 = isp.getloai1bySanPham(kq.MaSanPham);
+                kq.loaicon2 = isp.getloai2bySanPham(kq.MaSanPham);
             }
             return kq;
         }
-        public dynamic getspbyshop(string mashop) 
-        { 
-            return isp.Getspbyshop(mashop); 
-        }
-        public List<SanPhamModel> xemlichsugia()
+        public List<SanPhamModel> getspbyshop(string mashop, int pageIndex, int pageSize, out long total) 
         {
-            var kq = isp.GetSanPhams();
+            var kq = isp.Getspbyshop(mashop,pageIndex, pageSize, out total);
+            {
+                foreach (var item in kq)
+                {
+                    item.dsgiaban = isp.GetGiaBans(item.MaSanPham);
+                    item.giahientai = isp.Getgiahientai(item.MaSanPham);
+                    item.kho = isp.Getkhobysp(item.MaSanPham);
+                    item.danhmuc = isp.getloaibySanPham(item.MaSanPham);
+                    item.loaicon1 = isp.getloai1bySanPham(item.MaSanPham);
+                    item.loaicon2 = isp.getloai2bySanPham(item.MaSanPham);
+                }
+            }
+            return kq;
+        }
+        public List<SanPhamModel> xemlichsugia(int pageIndex, int pageSize, out long total)
+        {
+            var kq = isp.GetSanPhams( pageIndex,  pageSize, out  total);
             {
                 foreach(var item in kq)
                 {
@@ -42,15 +58,18 @@ namespace BLL
                 }
             }return kq;
         }
-        public List<SanPhamModel> getspwithfulldetail()
+        public List<SanPhamModel> getspwithfulldetail(int pageIndex, int pageSize, out long total)
         {
-            var kq = isp.GetSanPhams();
+            var kq = isp.GetSanPhams( pageIndex, pageSize, out total);
             {
                 foreach (var item in kq)
                 {
                     item.dsgiaban = isp.GetGiaBans(item.MaSanPham);
                     item.giahientai = isp.Getgiahientai(item.MaSanPham);
                     item.kho = isp.Getkhobysp(item.MaSanPham);
+                    item.danhmuc = isp.getloaibySanPham(item.MaSanPham);
+                    item.loaicon1 = isp.getloai1bySanPham(item.MaSanPham);
+                    item.loaicon2 = isp.getloai2bySanPham(item.MaSanPham);
                 }
             }
             return kq;
@@ -64,6 +83,9 @@ namespace BLL
                     item.dsgiaban = isp.GetGiaBans(item.MaSanPham);
                     item.giahientai = isp.Getgiahientai(item.MaSanPham);
                     item.kho = isp.Getkhobysp(item.MaSanPham);
+                    item.danhmuc = isp.getloaibySanPham(item.MaSanPham);
+                    item.loaicon1 = isp.getloai1bySanPham(item.MaSanPham);
+                    item.loaicon2 = isp.getloai2bySanPham(item.MaSanPham);
                 }
             }
             return kq;
@@ -77,6 +99,9 @@ namespace BLL
                     item.dsgiaban = isp.GetGiaBans(item.MaSanPham);
                     item.giahientai = isp.Getgiahientai(item.MaSanPham);
                     item.kho = isp.Getkhobysp(item.MaSanPham);
+                    item.danhmuc = isp.getloaibySanPham(item.MaSanPham);
+                    item.loaicon1 = isp.getloai1bySanPham(item.MaSanPham);
+                    item.loaicon2 = isp.getloai2bySanPham(item.MaSanPham);
                 }
             }
             return kq;
@@ -89,6 +114,9 @@ namespace BLL
                 item.dsgiaban = isp.GetGiaBans(item.MaSanPham);
                 item.giahientai = isp.Getgiahientai(item.MaSanPham);
                 item.kho = isp.Getkhobysp(item.MaSanPham);
+                item.danhmuc = isp.getloaibySanPham(item.MaSanPham);
+                item.loaicon1 = isp.getloai1bySanPham(item.MaSanPham);
+                item.loaicon2 = isp.getloai2bySanPham(item.MaSanPham);
             }
             return kq;
         }
@@ -101,6 +129,9 @@ namespace BLL
                     item.dsgiaban = isp.GetGiaBans(item.MaSanPham);
                     item.giahientai = isp.Getgiahientai(item.MaSanPham);
                     item.kho = isp.Getkhobysp(item.MaSanPham);
+                    item.danhmuc = isp.getloaibySanPham(item.MaSanPham);
+                    item.loaicon1 = isp.getloai1bySanPham(item.MaSanPham);
+                    item.loaicon2 = isp.getloai2bySanPham(item.MaSanPham);
                 }
             }
             return kq;
@@ -114,6 +145,9 @@ namespace BLL
                     item.dsgiaban = isp.GetGiaBans(item.MaSanPham);
                     item.giahientai = isp.Getgiahientai(item.MaSanPham);
                     item.kho = isp.Getkhobysp(item.MaSanPham);
+                    item.danhmuc = isp.getloaibySanPham(item.MaSanPham);
+                    item.loaicon1 = isp.getloai1bySanPham(item.MaSanPham);
+                    item.loaicon2 = isp.getloai2bySanPham(item.MaSanPham);
                 }
             }
             return kq;
@@ -127,6 +161,9 @@ namespace BLL
                     item.dsgiaban = isp.GetGiaBans(item.MaSanPham);
                     item.giahientai = isp.Getgiahientai(item.MaSanPham);
                     item.kho = isp.Getkhobysp(item.MaSanPham);
+                    item.danhmuc = isp.getloaibySanPham(item.MaSanPham);
+                    item.loaicon1 = isp.getloai1bySanPham(item.MaSanPham);
+                    item.loaicon2 = isp.getloai2bySanPham(item.MaSanPham);
                 }
             }
             return kq;

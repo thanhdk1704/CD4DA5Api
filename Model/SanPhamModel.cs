@@ -19,6 +19,9 @@ namespace Model
         public string ThongTin { get; set; }
         public KhoModel kho { get; set; }
         public List<GiaBanModel> dsgiaban { get; set; }
+        public LoaiModel danhmuc { get; set; }
+        public LoaiCon1Model loaicon1 { get; set; }
+        public LoaiCon2Model loaicon2 { get; set; }
         public GiaBanModel giahientai { get; set; }
         public long? Total { get; set; }
     }

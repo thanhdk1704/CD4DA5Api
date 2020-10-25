@@ -7,11 +7,11 @@ namespace BLL.Interfaces
 {
     public partial interface ISanPhamBusiness
     {
-        List<SanPhamModel> all();
+        List<SanPhamModel> all(int pageIndex, int pageSize, out long total);
         SanPhamModel Chitietsanpham(string link);
-        dynamic getspbyshop(string mashop);
-        public List<SanPhamModel> xemlichsugia();
-        List<SanPhamModel> getspwithfulldetail();
+        List<SanPhamModel> getspbyshop(string mashop, int pageIndex, int pageSize, out long total);
+        List<SanPhamModel> xemlichsugia(int pageIndex, int pageSize, out long total);
+        List<SanPhamModel> getspwithfulldetail(int pageIndex, int pageSize, out long total);
         List<SanPhamModel> phantrang(int index, int size, out long total);
         List<SanPhamModel> SanphamtheoLoaiCon2(int pageIndex, int pageSize, string link, out long total);
         List<SanPhamModel> SPtheoKhoangGia(int min, int max);

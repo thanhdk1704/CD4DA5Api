@@ -1,15 +1,52 @@
-﻿using Model;
+﻿using DAL.Helper;
+using Model;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace DAL
 {
-    interface DonHangRepository:IDonHangRepository
+    public class DonHangRepository:IDonHangRepository
     {
-        public List<DonHangModel> GetDonHang()
+
+        private IDatabaseHelper _dbHelper;
+        public DonHangRepository(IDatabaseHelper dbHelper)
         {
-            return null;
+            _dbHelper = dbHelper;
+        }
+
+        public List<DonHangModel> GetDonHangByShop(string mashop, int page_index, int page_size, out long total)
+        {
+            total = 0;
+            string msgError = "";
+            try
+            {
+                var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "getdhbyshop", "@mashop",mashop, "@page_index", page_index, "@page_size", page_size);
+                if (!string.IsNullOrEmpty(msgError))
+                    throw new Exception(msgError);
+                if (dt.Rows.Count > 0) total = (long)dt.Rows[0]["RecordCount"];
+                return dt.ConvertTo<DonHangModel>().ToList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public List<ChiTietDonHangModel> getctbymadonhang(string madon)
+        {
+            string msgError = "";
+            try
+            {
+                var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "getchitietdonhang", "@madh", madon);
+                if (!string.IsNullOrEmpty(msgError))
+                    throw new Exception(msgError);
+                return dt.ConvertTo<ChiTietDonHangModel>().ToList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }

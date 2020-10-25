@@ -20,9 +20,9 @@ namespace API.Controllers.Server
             this.isp = isp;
         }
         [Route("all")]
-        public IEnumerable<SanPhamModel> Getall()
+        public IEnumerable<SanPhamModel> Getall(int pageIndex, int pageSize, out long total)
         {
-            return isp.all();
+            return isp.all( pageIndex,  pageSize, out  total);
         }
 
         [Route("detail/{link}")]
@@ -30,15 +30,24 @@ namespace API.Controllers.Server
         {
             return isp.Chitietsanpham(link); ;
         }
-        [Route("all-by-shop/{id}")]
-        public dynamic getspbyshop(string id)
+        [Route("all-by-shop/{link}/{pageIndex}/{pageSize}")]
+        public ResponseModel getspbyshop(string link,int pageIndex, int pageSize)
         {
-            return isp.getspbyshop(id);
+            long total;
+            var response = new ResponseModel();
+            response.Page = pageIndex;
+            response.PageSize = pageSize;
+            response.Data= isp.getspbyshop(link,pageSize,pageSize,out total);
+            response.TotalItems = total;
+            return response;
         }
-        [Route("all-with-details")]
-        public List<SanPhamModel> getfulldetails()
+        [Route("all-with-details/{pageIndex}/{pageSize}")]
+        public List<SanPhamModel> getfulldetails(int pageIndex, int pageSize)
         {
-            return isp.getspwithfulldetail();
+            long total =0;
+            var kq= isp.getspwithfulldetail( pageIndex,  pageSize, out  total);
+            foreach (var item in kq) item.Total = total;
+            return kq;
         }
 
         [Route("all-pagedlist")]

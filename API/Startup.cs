@@ -51,7 +51,8 @@ namespace API
             services.AddTransient<IKhachHangBusiness, KhachHangBusiness>();
             services.AddTransient<ISanPhamRepository, SanPhamRepository>();
             services.AddTransient<ISanPhamBusiness, SanPhamBusiness>();
-
+            services.AddTransient<IDonHangRepository,DonHangRepository>();
+            services.AddTransient<IDonHangBusiness, DonHangBusiness>();
 
         }
 
