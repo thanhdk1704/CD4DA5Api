@@ -24,9 +24,9 @@ namespace DAL
         List<SanPhamModel> Getspbyloai1(string link);
         List<SanPhamModel> Getspbyloai(int pageIndex, int pageSize, string link, out long total);
         List<SanPhamModel> Getspbyshop(int pageIndex, int pageSize, string link, out long total);
-        List<SanPhamModel> Create(SanPhamModel spmoi);
+        SanPhamModel Create(SanPhamModel spmoi, GiaBanModel gbmoi, KhoModel kho);
         int Delete(string masp);
-        List<KhoModel> AddKho(string MaSanPham, string MaShop, int SoLuong, int GiaNhap);
+        List<KhoModel> AddKho(KhoModel kho);
         List<GiaBanModel> Addprice(string MaSanPham, int Gia);
     }
 }

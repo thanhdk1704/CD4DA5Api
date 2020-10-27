@@ -286,7 +286,7 @@ namespace DAL
                 throw ex;
             }
         }
-        public List<SanPhamModel> Create(SanPhamModel spmoi)
+        public SanPhamModel Create(SanPhamModel spmoi,GiaBanModel gbmoi,KhoModel kho)
         {
             string msgError = "";
             try
@@ -297,10 +297,14 @@ namespace DAL
                             "@MoTa", spmoi.MoTa,
                             "@GhiChu", spmoi.GhiChu,
                             "@Link", spmoi.Link,
-                            "@anh",spmoi.Anh);
+                            "@anh",spmoi.Anh,
+                             "@mashop",kho.MaShop,
+                                "@soluong",kho.SoLuong,
+                                "@gianhap",kho.GiaNhap,
+                                    "@giaban",gbmoi.Gia);
                 if (!string.IsNullOrEmpty(msgError))
                     throw new Exception(msgError);
-                return dt.ConvertTo<SanPhamModel>().ToList();
+                return dt.ConvertTo<SanPhamModel>().FirstOrDefault();
 
             }
             catch (Exception ex)
@@ -326,15 +330,15 @@ namespace DAL
                 throw ex;
             }
         }
-        public List<KhoModel> AddKho(string MaSanPham,string MaShop,int SoLuong, int GiaNhap)
+        public List<KhoModel> AddKho(KhoModel kho)
         {
             string msgError = "";
             try
             {
                 var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "themkho",
-                          "@MaSanPham", MaSanPham,
-                          "@MaShop",MaShop,"@SoLuong",SoLuong,
-                         "@GiaNhap", GiaNhap);
+                          "@MaSanPham", kho.MaSanPham,
+                          "@MaShop",kho.MaShop,"@SoLuong",kho.SoLuong,
+                         "@GiaNhap", kho.GiaNhap);
                 if (!string.IsNullOrEmpty(msgError))
                     throw new Exception(msgError);
                 return dt.ConvertTo<KhoModel>().ToList();
@@ -344,6 +348,9 @@ namespace DAL
             {
                 throw ex;
             }
+        }
+        public void update() { 
+
         }
         public int Delete(string masp)
         {

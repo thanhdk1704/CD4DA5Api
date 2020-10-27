@@ -7,7 +7,7 @@ using BLL.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Model;
-
+using System.Text.RegularExpressions;
 namespace API.Controllers.Server
 {
     [Route("api/[controller]")]
@@ -28,6 +28,7 @@ namespace API.Controllers.Server
         [Route("detail/{link}")]
         public SanPhamModel Chitietsanpham(string link)
         {
+            
             return isp.Chitietsanpham(link); ;
         }
         [Route("all-by-shop/{link}/{pageIndex}/{pageSize}")]
@@ -117,17 +118,34 @@ namespace API.Controllers.Server
         }
         [Route("them")]
         [HttpPost]
-        public int create(SanPhamModel spmoi,string MaShop,int SLKho,int GiaNhap,int GiaBan)
+        public SanPhamModel create( string MaLoai2, string TenSanPham,
+                            string MoTa,
+                           string GhiChu,
+                           string Link,
+                           string Anh,
+                            string MaShop,
+                            int SoLuong,
+                              int GiaNhap,
+                                    int Gia)
         {
-            if (GiaNhap > GiaBan) { 
-            var newpro= isp.Create(spmoi);
-            var sto = isp.ThemKho(spmoi.MaSanPham, MaShop, SLKho, GiaNhap);
-            var price = isp.ThemGiaBan(spmoi.MaSanPham, GiaBan);
-            if (newpro == null || newpro.ToArray() == null) return -1;
-            if (sto == null || sto.ToArray() == null) return -2;
-            if (price == null || price.ToArray() == null) return -3;
-            return 1;}
-            else return 0;
+          
+            SanPhamModel spmoi = new SanPhamModel();
+            KhoModel kho = new KhoModel();
+            GiaBanModel gbmoi = new GiaBanModel();
+            spmoi.MaLoai2 = MaLoai2;
+            spmoi.TenSanPham = TenSanPham;
+            spmoi.MoTa = MoTa;
+            spmoi.GhiChu = GhiChu;
+            spmoi.Link = Link;
+            spmoi.Anh = Anh;
+            kho.MaShop = MaShop;
+            kho.SoLuong = SoLuong;
+            
+            kho.GiaNhap = GiaNhap;
+            gbmoi.Gia = Gia;
+            var newpro = isp.Create(spmoi, gbmoi, kho);
+
+            return newpro;
 
         }
         [Route("update")]

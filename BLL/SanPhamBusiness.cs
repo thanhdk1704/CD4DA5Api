@@ -182,13 +182,13 @@ namespace BLL
             }
             return kq;
         }
-        public List<SanPhamModel> Create(SanPhamModel spmoi)
+        public SanPhamModel Create(SanPhamModel spmoi, GiaBanModel gbmoi, KhoModel kho)
         {
-            return isp.Create(spmoi);
+            return isp.Create(spmoi,gbmoi,kho);
         }
-        public List<KhoModel> ThemKho(string MaSanPham, string MaShop, int SoLuong, int GiaNhap)
+        public List<KhoModel> ThemKho(KhoModel kho)
         {
-            return isp.AddKho(MaSanPham, MaShop,  SoLuong,  GiaNhap);
+            return isp.AddKho(kho);
         }
         public List<GiaBanModel> ThemGiaBan(string MaSanPham,int Gia)
         {
