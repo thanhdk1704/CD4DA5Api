@@ -22,6 +22,18 @@ namespace BLL
                 item.chitiet = isp.getctbymadonhang(item.MaDH);
             }
             return kq;
-        } 
+        }
+        public List<Provinces> getalltinh()
+        {
+            return isp.getalltinh();
+        }
+        public List<Districts> gethuyenbytinh(int matinh)
+        {
+            return isp.gethuyenbytinh(matinh);
+        }
+        public List<Wards> getxabyhuyen(int mahuyen)
+        {
+            return isp.getxabyhuyen(mahuyen);
+        }
     }
 }
