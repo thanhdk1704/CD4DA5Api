@@ -8,6 +8,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Model;
 using System.Text.RegularExpressions;
+using Microsoft.Extensions.Configuration;
+using System.IO;
+
 namespace API.Controllers.Server
 {
     [Route("api/[controller]")]
@@ -15,9 +18,37 @@ namespace API.Controllers.Server
     public class QLSanPhamController : ControllerBase
     {
         private ISanPhamBusiness isp;
-        public QLSanPhamController(ISanPhamBusiness isp)
+        private string _path;
+        public QLSanPhamController(ISanPhamBusiness isp, IConfiguration configuration)
         {
             this.isp = isp;
+            _path = configuration["AppSettings:PATH"];
+        }
+        public string WriteFileToAuthAccessFolder(string RelativePathFileName, string base64StringData)
+        {
+            try
+            {
+                string result = "";
+                string serverRootPathFolder = _path;
+                string fullPathFile = $@"{serverRootPathFolder}\{RelativePathFileName}";
+                string fullPathFolder = Path.GetDirectoryName(fullPathFile);
+                if (!Directory.Exists(fullPathFolder))
+                    Directory.CreateDirectory(fullPathFolder);
+                System.IO.File.WriteAllBytes(fullPathFile, Convert.FromBase64String(base64StringData));
+                return result;
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+        }
+        public string SaveFileFromBase64String(string RelativePathFileName, string dataFromBase64String)
+        {
+            if (dataFromBase64String.Contains("base64,"))
+            {
+                dataFromBase64String = dataFromBase64String.Substring(dataFromBase64String.IndexOf("base64,", 0) + 7);
+            }
+            return WriteFileToAuthAccessFolder(RelativePathFileName, dataFromBase64String);
         }
         [Route("all")]
         public IEnumerable<SanPhamModel> Getall(int pageIndex, int pageSize, out long total)

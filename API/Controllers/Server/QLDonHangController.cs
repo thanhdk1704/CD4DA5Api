@@ -34,11 +34,27 @@ namespace API.Controllers.Server
             
 
         }
+        [Route("by-id/{madon}")]
+        public DonHangModel getbyid(string madon)
+        {
+            return isp.GetOdersById(madon);
+        }
+        [Route("change-stt/{madon}")]
+        public DonHangModel thaydoitrangthai(string madon)
+        {
+            return isp.doitrangthai(madon);
+        }
+        [Route("cancel/{madon}")]
+        public DonHangModel huydon(string madon)
+        {
+            return isp.huydon(madon);
+        }
         [Route("get-all-tinh")]
         public List<Provinces> getalltinh()
         {
             return isp.getalltinh();
         }
+
         [Route("get-huyen-by-tinh/{matinh}")]
         public List<Districts> gethuyenbytinh(int matinh)
         {

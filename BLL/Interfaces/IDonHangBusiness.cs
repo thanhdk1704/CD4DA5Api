@@ -11,5 +11,8 @@ namespace BLL.Interfaces
         List<Provinces> getalltinh();
         List<Districts> gethuyenbytinh(int matinh);
         List<Wards> getxabyhuyen(int mahuyen);
+        DonHangModel huydon(string madon);
+        DonHangModel doitrangthai(string madon);
+        DonHangModel GetOdersById(string madon);
     }
 }

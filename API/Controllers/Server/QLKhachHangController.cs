@@ -18,34 +18,54 @@ namespace API.Controllers.Server
         {
             item = items;
         }
-        [Route("khach-hang")]
+        [Route("{index}/{size}")]
         [HttpGet]
-        public List<KhachHangModel> getallkhach()
+        public ResponseModel getallkhach(int index,int size)
         {
-            return item.AllCtm();
+            long total = 0;
+            var kq = new ResponseModel();
+            kq.Data= item.GetKh(index, size,out total);
+            kq.TotalItems = total;
+            return kq;
         }
-        [Route("khach-hang/{id}")]
+        [Route("{id}")]
         [HttpGet]
         public KhachHangModel getkhachbyid(string id)
         {
             return item.Cusbyid(id);
         }
-        [Route("khach-hang/dia-chi/{id}")]
+        [Route("dia-chi/{id}")]
         [HttpGet]
         public List<DiaChiModel> Diachibykh(string id)
         {
             return item.GetAddress(id);
         }
-        [Route("khach-hang/dia-chi")]
+        [Route("dia-chi/{index}/{size}")]
         [HttpGet]
-        public List<KhachHangModel>KhWDiaChi()
+        public ResponseModel KhWDiaChi(int index, int size)
         {
-            return item.KhwDiaChi();
+            long total = 0;
+            var kq = new ResponseModel();
+            kq.Data = item.KhwDiaChi(index,size,out total);
+            kq.TotalItems = total;
+            return kq;
         }
-        [Route("khach-hang/full")]
-        public List<KhachHangModel> Getfull()
+        [Route("full/{index}/{size}")]
+        public ResponseModel Getfull(int index, int size)
         {
-            return item.Getfulldetails();
+
+            long total = 0;
+            var kq = new ResponseModel();
+            kq.Data = item.Getfulldetails(index, size, out total);
+            kq.TotalItems = total;
+            return kq;
+        }
+        [Route("them-dc")]
+        [HttpPost]
+        public DiaChiModel themdiachi(DiaChiModel dc) {
+            DiaChiModel dcmoi = new DiaChiModel();
+            dcmoi = item.ThemDiaChi(dc);
+            return dcmoi;
         }
     }
 }

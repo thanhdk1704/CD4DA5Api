@@ -8,10 +8,11 @@ namespace BLL.Interfaces
     public partial interface IKhachHangBusiness
     {
 
-        public List<KhachHangModel> AllCtm();
+        public List<KhachHangModel> GetKh(int index, int size, out long total);
         public KhachHangModel Cusbyid(string id);
         public List<DiaChiModel> GetAddress(string id);
-        public List<KhachHangModel> KhwDiaChi();
-        List<KhachHangModel> Getfulldetails();
+        public List<KhachHangModel> KhwDiaChi(int index, int size, out long total);
+        List<KhachHangModel> Getfulldetails(int index, int size, out long total);
+        DiaChiModel ThemDiaChi(DiaChiModel dc);
     }
 }

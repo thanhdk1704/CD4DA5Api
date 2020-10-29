@@ -16,14 +16,19 @@ namespace DAL
         {
             _dbHelper = dbHelper;
         }
-        public List<KhachHangModel> GetKh()
+        public List<KhachHangModel> GetKh(int index, int size, out long total)
         {
+            total = 0;
             string msgError = "";
             try
             {
-                var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "getkh");
+                var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "getkh",
+                    "@page_index", index,
+                    "@page_size", size
+                    );
                 if (!string.IsNullOrEmpty(msgError))
                     throw new Exception(msgError);
+                if (dt.Rows.Count > 0) total = (long)dt.Rows[0]["RecordCount"];
                 return dt.ConvertTo<KhachHangModel>().ToList();
             }
             catch (Exception ex)
@@ -46,6 +51,21 @@ namespace DAL
                 throw ex;
             }
         }
+        public DiaChiModel Getdcbyid(int id)
+        {
+            string msgError = "";
+            try
+            {
+                var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "getdiachibyid", "@madc", id);
+                if (!string.IsNullOrEmpty(msgError))
+                    throw new Exception(msgError);
+                return dt.ConvertTo<DiaChiModel>().FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
         public List<DiaChiModel> GeDiachi(string id)
         {
             string msgError = "";
@@ -61,6 +81,27 @@ namespace DAL
                 throw ex;
             }
         }
+        public DiaChiModel themdiachi(DiaChiModel dc)
+        {
+            string msgError = "";
+            try
+            {
+                var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "themdiachi",
+                   "@makh", dc.MaKhachHang,
+                   "@xa",dc.Xa,
+                   "@huyen",dc.Huyen,
+                   "@tinh",dc.Tinh,
+                   "@chitiet",dc.ChiTiet,
+                   "@sdt",dc.SoDienThoai);
+                if (!string.IsNullOrEmpty(msgError))
+                    throw new Exception(msgError);
+                return dt.ConvertTo<DiaChiModel>().FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
         public TaiKhoanModel GetTaiKhoan(string makh)
         {
             string msgError = "";
@@ -69,13 +110,57 @@ namespace DAL
                 var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "gettaikhoanbykh", "@makh", makh);
                 if (!string.IsNullOrEmpty(msgError))
                     throw new Exception(msgError);
-                return dt.ConvertTo<TaiKhoanModel>().ToList().FirstOrDefault();
+                return dt.ConvertTo<TaiKhoanModel>().FirstOrDefault();
             }
             catch (Exception ex)
             {
                 throw ex;
             }
         }
-
+        public Provinces GetTinh(int id)
+        {
+            string msgError = "";
+            try
+            {
+                var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "getProvinceById", "@id", id);
+                if (!string.IsNullOrEmpty(msgError))
+                    throw new Exception(msgError);
+                return dt.ConvertTo<Provinces>().FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public Districts GetHuyen(int id)
+        {
+            string msgError = "";
+            try
+            {
+                var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "getDistrictByID", "@id", id);
+                if (!string.IsNullOrEmpty(msgError))
+                    throw new Exception(msgError);
+                return dt.ConvertTo<Districts>().FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public Wards GetXa(int id)
+        {
+            string msgError = "";
+            try
+            {
+                var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "getWardByID", "@id", id);
+                if (!string.IsNullOrEmpty(msgError))
+                    throw new Exception(msgError);
+                return dt.ConvertTo<Wards>().FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

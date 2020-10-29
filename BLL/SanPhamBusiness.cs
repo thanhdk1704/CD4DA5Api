@@ -16,6 +16,7 @@ namespace BLL
         }
         public List<SanPhamModel> all(int pageIndex, int pageSize, out long total)
         {
+          
             return isp.GetSanPhams( pageIndex,  pageSize, out  total);
         } 
 

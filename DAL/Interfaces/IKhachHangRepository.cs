@@ -7,9 +7,14 @@ namespace DAL
 {
    public interface IKhachHangRepository
     {
-        List<KhachHangModel> GetKh();
+        List<KhachHangModel> GetKh(int index, int size, out long total);
         KhachHangModel getbyid(string id);
         List<DiaChiModel> GeDiachi(string id);
         TaiKhoanModel GetTaiKhoan(string makh);
+        Provinces GetTinh(int id);
+        Districts GetHuyen(int id);
+        Wards GetXa(int id);
+        DiaChiModel themdiachi(DiaChiModel dc);
+        DiaChiModel Getdcbyid(int id);
     }
 }
