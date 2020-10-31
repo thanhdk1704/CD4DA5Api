@@ -34,6 +34,20 @@ namespace API.Controllers.Server
             
 
         }
+        [Route("getbystt/{mashop}/{trangthai}/{pageIndex}/{pageSize}")]
+        public ResponseModel GetOdersbySTT(string mashop,int trangthai,int pageIndex, int pageSize)
+        {
+            long total = 0;
+
+            var orders = new ResponseModel();
+            orders.Page = pageIndex;
+            orders.PageSize = pageSize;
+            orders.Data = isp.GetOdersByStatus(mashop, trangthai,pageIndex, pageSize, out total);
+            orders.TotalItems = total;
+            return orders;
+
+
+        }
         [Route("by-id/{madon}")]
         public DonHangModel getbyid(string madon)
         {

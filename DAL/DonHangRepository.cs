@@ -33,6 +33,23 @@ namespace DAL
                 throw ex;
             }
         }
+        public List<DonHangModel> GetDonHangByTrangThai(string mashop, int trangthai, int page_index, int page_size, out long total)
+        {
+            total = 0;
+            string msgError = "";
+            try
+            {
+                var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "getdhbyshop", "@mashop", mashop, "@trangthai", trangthai, "@page_index", page_index, "@page_size", page_size);
+                if (!string.IsNullOrEmpty(msgError))
+                    throw new Exception(msgError);
+                if (dt.Rows.Count > 0) total = (long)dt.Rows[0]["RecordCount"];
+                return dt.ConvertTo<DonHangModel>().ToList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
         public DonHangModel Getbyid(string madon)
         {
             string msgError = "";

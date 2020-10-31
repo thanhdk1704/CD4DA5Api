@@ -30,6 +30,20 @@ namespace BLL
             }
             return kq;
         }
+        public List<DonHangModel> GetOdersByStatus(string mashop,int trangthai,int pageIndex, int pageSize, out long total)
+        {
+            var kq = isp.GetDonHangByTrangThai(mashop, trangthai,pageIndex, pageSize, out total);
+            foreach (var item in kq)
+            {
+                item.chitiet = isp.getctbymadonhang(item.MaDH);
+                item.thongtinkh = isp2.getbyid(item.MaKH);
+                item.diachinhanhang = isp2.Getdcbyid(item.MaDiaChi);
+                item.diachinhanhang.tttinh = isp2.GetTinh(item.diachinhanhang.Tinh);
+                item.diachinhanhang.tthuyen = isp2.GetHuyen(item.diachinhanhang.Huyen);
+                item.diachinhanhang.ttxa = isp2.GetXa(item.diachinhanhang.Xa);
+            }
+            return kq;
+        }
         public DonHangModel GetOdersById(string madon)
         {
             var kq = isp.Getbyid(madon);
