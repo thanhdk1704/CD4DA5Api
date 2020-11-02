@@ -4,11 +4,12 @@ using System.Text;
 
 namespace Model
 {
-    class ChiTietLuaChonModel
+    public class ChiTietLuaChonModel
     {
         public string MaCT{get;set;}
       public string MaLuaChon{get;set;}
       public string MaSanPham{get;set;}
       public string GiaTri{get;set;}
+        public LuaChonModel detail { get; set; }
     }
 }

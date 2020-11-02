@@ -21,6 +21,7 @@ namespace Model
         public int? displayed { get; set; }
         public string anh { get; set; }
         public List<LoaiCon1Model> children { get; set; }
+        public int income { get; set; }
 
     }
 }

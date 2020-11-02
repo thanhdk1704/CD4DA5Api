@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BLL.Interfaces;
+using DAL.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Model;
 
 namespace API.Controllers.Server
 {
@@ -11,5 +14,17 @@ namespace API.Controllers.Server
     [ApiController]
     public class ThongKeController : ControllerBase
     {
+        private IThongKeBusiness itk;
+
+        public ThongKeController(IThongKeBusiness itk)
+        {
+            this.itk = itk;
+        }
+        [Route("thang/{mashop}/{thang}")]
+        public ThongKeModel thongkethang(string mashop,int thang)
+        {
+            int total = 0;
+            return itk.ThongkeThang(mashop, thang,out total);
+        }
     }
 }

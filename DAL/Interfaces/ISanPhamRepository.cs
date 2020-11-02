@@ -28,5 +28,6 @@ namespace DAL
         int Delete(string masp);
         List<KhoModel> AddKho(KhoModel kho);
         List<GiaBanModel> Addprice(string MaSanPham, int Gia);
+        List<ChiTietLuaChonModel> getluachonbysp(string masp);
     }
 }

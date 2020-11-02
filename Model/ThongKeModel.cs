@@ -6,8 +6,13 @@ namespace Model
 {
    public class ThongKeModel
     {
-        public int totalamount { get; set; }
-        public int totalvalue { get; set; }
+        public int totalAmount { get; set; }
+        public int totalValue { get; set; }
+        public int totalOrders { get; set; }
+        public int totalOrdersReturns { get; set; }
         public List<SanPhamModel> spbanchay { get; set; }
+        public List<SanPhamModel> sphethang { get; set; }
+        public List<LoaiModel> incomebycates { get;set; }
+        public List<DonHangModel>dsdh { get; set; }
     }
 }

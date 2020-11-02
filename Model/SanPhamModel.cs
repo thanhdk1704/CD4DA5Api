@@ -24,5 +24,7 @@ namespace Model
         public LoaiCon2Model loaicon2 { get; set; }
         public GiaBanModel giahientai { get; set; }
         public long? Total { get; set; }
+        public List<SPThuocTinhModel> dsthuoctinh { get; set; }
+        public List<ChiTietLuaChonModel> dsluachon { get; set; }
     }
 } 

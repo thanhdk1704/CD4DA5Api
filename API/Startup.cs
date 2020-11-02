@@ -7,6 +7,7 @@ using BLL;
 using BLL.Interfaces;
 using DAL;
 using DAL.Helper;
+using DAL.Interfaces;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -79,6 +80,10 @@ namespace API
             services.AddTransient<ISanPhamBusiness, SanPhamBusiness>();
             services.AddTransient<IDonHangRepository,DonHangRepository>();
             services.AddTransient<IDonHangBusiness, DonHangBusiness>();
+            services.AddTransient<IThongKeRepository, ThongKeRepository>();
+            services.AddTransient<IThongKeBusiness, ThongKeBusiness>();
+            services.AddTransient<IHoaDonNhapReopository, HoaDonNhapRepository>();
+            services.AddTransient<IHoaDonNhapBusiness, HoaDonNhapBusiness>();
 
         }
 
