@@ -1,5 +1,6 @@
 ﻿using BLL.Interfaces;
 using DAL;
+using DAL.Interfaces;
 using Model;
 using System;
 using System.Collections.Generic;
@@ -10,9 +11,11 @@ namespace BLL
     public partial class SanPhamBusiness:ISanPhamBusiness
     {
         private ISanPhamRepository isp;
-        public SanPhamBusiness(ISanPhamRepository isp)
+        private IThongKeRepository itk;
+        public SanPhamBusiness(ISanPhamRepository isp, IThongKeRepository itk)
         {
             this.isp = isp;
+            this.itk = itk;
         }
         public List<SanPhamModel> all(int pageIndex, int pageSize, out long total)
         {
@@ -30,6 +33,22 @@ namespace BLL
                 kq.danhmuc = isp.getloaibySanPham(kq.MaSanPham);
                 kq.loaicon1 = isp.getloai1bySanPham(kq.MaSanPham);
                 kq.loaicon2 = isp.getloai2bySanPham(kq.MaSanPham);
+            }
+            return kq;
+        }
+        public List<SanPhamModel> getspbanchay(string mashop, int thang)
+        {
+            var kq = itk.Spbanchay(mashop, thang);
+            {
+                foreach (var item in kq)
+                {
+                    item.dsgiaban = isp.GetGiaBans(item.MaSanPham);
+                    item.giahientai = isp.Getgiahientai(item.MaSanPham);
+                    item.kho = isp.Getkhobysp(item.MaSanPham);
+                    item.danhmuc = isp.getloaibySanPham(item.MaSanPham);
+                    item.loaicon1 = isp.getloai1bySanPham(item.MaSanPham);
+                    item.loaicon2 = isp.getloai2bySanPham(item.MaSanPham);
+                }
             }
             return kq;
         }

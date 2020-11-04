@@ -55,7 +55,11 @@ namespace API.Controllers.Server
         {
             return isp.all( pageIndex,  pageSize, out  total);
         }
-
+        [Route("ban-chay/{mashop}/{thang}")]
+        public IEnumerable<SanPhamModel> GetBanChay(string mashop, int thang)
+        {
+            return isp.getspbanchay(mashop,thang);
+        }
         [Route("detail/{link}")]
         public SanPhamModel Chitietsanpham(string link)
         {
@@ -69,7 +73,7 @@ namespace API.Controllers.Server
             var response = new ResponseModel();
             response.Page = pageIndex;
             response.PageSize = pageSize;
-            response.Data= isp.getspbyshop(link,pageSize,pageSize,out total);
+            response.Data= isp.getspbyshop(link,pageIndex,pageSize,out total);
             response.TotalItems = total;
             return response;
         }

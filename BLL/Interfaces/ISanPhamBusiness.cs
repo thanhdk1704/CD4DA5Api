@@ -23,5 +23,6 @@ namespace BLL.Interfaces
         int delete(string masp);
         List<GiaBanModel> ThemGiaBan(string MaSanPham, int Gia);
         List<KhoModel> ThemKho(KhoModel kho);
+        List<SanPhamModel> getspbanchay(string mashop, int thang);
     }
 }

@@ -27,11 +27,15 @@ namespace DAL
             try
             {
                 var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "doanhthutheoshoptheothang", "@mashop", mashop, "@thang", thang);
+                var dt2 = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "chiphinhaphangtheothang", "@mashop", mashop, "@thang", thang);
                 if (!string.IsNullOrEmpty(msgError))
                     throw new Exception(msgError);
                 if (dt.Rows.Count > 0 && dt.Rows[0]["DoanhThu"] != DBNull.Value) kq.totalValue = (int)dt.Rows[0]["DoanhThu"];
                 if (dt.Rows.Count > 0 && dt.Rows[0]["DonVi"] != DBNull.Value) kq.totalAmount = (int)dt.Rows[0]["DonVi"];
                 if (dt.Rows.Count > 0 && dt.Rows[0]["Orders"] != null) kq.totalOrders = (int)dt.Rows[0]["Orders"];
+                if (dt2.Rows.Count > 0 && dt2.Rows[0]["ChiPhi"] != DBNull.Value) kq.totalReValue = (int)dt2.Rows[0]["ChiPhi"];
+                if (dt2.Rows.Count > 0 && dt2.Rows[0]["DonVi"] != DBNull.Value) kq.totalReAmount = (int)dt2.Rows[0]["DonVi"];
+                //if (dt2.Rows.Count > 0 && dt2.Rows[0]["Orders"] != null) kq.totalIR = (int)dt2.Rows[0]["Orders"];
                 return kq;
             }
             catch (Exception ex)
@@ -39,7 +43,44 @@ namespace DAL
                 throw ex;
             }
         }
-        
+        public List<DonHangModel> donhangtheothang(string mashop, int thang)
+        {
+            string msgError = "";
+
+            try
+            {
+                var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "dhtheoshoptheothang", "@mashop", mashop, "@thang", thang);
+                if (!string.IsNullOrEmpty(msgError))
+                    throw new Exception(msgError);
+
+                var kq = dt.ConvertTo<DonHangModel>().ToList();
+               
+                return kq;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public List<HoaDonNhapModel> phieunhaptheothang(string mashop, int thang)
+        {
+            string msgError = "";
+
+            try
+            {
+                var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "phieunhaptheoshoptheothang", "@mashop", mashop, "@thang", thang);
+                if (!string.IsNullOrEmpty(msgError))
+                    throw new Exception(msgError);
+
+                var kq = dt.ConvertTo<HoaDonNhapModel>().ToList();
+
+                return kq;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
         public int doanhthutheoloaitheothang(string mashop, int maloai, int thang, out int doanhthu)
         {
             doanhthu = 0;
@@ -68,7 +109,7 @@ namespace DAL
                     throw new Exception(msgError);
               
                 var kq= dt.ConvertTo<SanPhamModel>().ToList();
-                foreach(var item in kq) { }
+            
                 return kq;
             }
             catch (Exception ex)

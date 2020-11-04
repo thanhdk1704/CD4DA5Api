@@ -21,7 +21,16 @@ namespace BLL
             var kq= isp.GetDonHangByShop(mashop, pageIndex,  pageSize, out  total);
             foreach(var item in kq)
             {
+                item.Tonggiatri = 0;
+                item.TongDonVi = 0;
                 item.chitiet = isp.getctbymadonhang(item.MaDH);
+                {
+                    for (int i = 0; i < item.chitiet.Count; i++)
+                    {
+                        item.Tonggiatri += item.chitiet[i].DonGia * item.chitiet[i].SoLuong;
+                        item.TongDonVi += item.chitiet[i].SoLuong;
+                    }
+                }
                 item.thongtinkh = isp2.getbyid(item.MaKH);
                 item.diachinhanhang = isp2.Getdcbyid(item.MaDiaChi);
                 item.diachinhanhang.tttinh = isp2.GetTinh(item.diachinhanhang.Tinh);
@@ -35,7 +44,14 @@ namespace BLL
             var kq = isp.GetDonHangByTrangThai(mashop, trangthai,pageIndex, pageSize, out total);
             foreach (var item in kq)
             {
+                item.Tonggiatri = 0;
+                item.TongDonVi = 0;
                 item.chitiet = isp.getctbymadonhang(item.MaDH);
+                for (int i = 0; i < item.chitiet.Count; i++)
+                {
+                    item.Tonggiatri += item.chitiet[i].DonGia * item.chitiet[i].SoLuong;
+                    item.TongDonVi += item.chitiet[i].SoLuong;
+                }
                 item.thongtinkh = isp2.getbyid(item.MaKH);
                 item.diachinhanhang = isp2.Getdcbyid(item.MaDiaChi);
                 item.diachinhanhang.tttinh = isp2.GetTinh(item.diachinhanhang.Tinh);
@@ -47,8 +63,14 @@ namespace BLL
         public DonHangModel GetOdersById(string madon)
         {
             var kq = isp.Getbyid(madon);
-            
+            kq.TongDonVi = 0;
+            kq.Tonggiatri = 0;
                 kq.chitiet = isp.getctbymadonhang(kq.MaDH);
+            for (int i = 0; i < kq.chitiet.Count; i++)
+            {
+                kq.Tonggiatri += kq.chitiet[i].DonGia * kq.chitiet[i].SoLuong;
+                kq.TongDonVi += kq.chitiet[i].SoLuong;
+            }
                 kq.thongtinkh = isp2.getbyid(kq.MaKH);
                 kq.diachinhanhang = isp2.Getdcbyid(kq.MaDiaChi);
             kq.diachinhanhang.tttinh = isp2.GetTinh(kq.diachinhanhang.Tinh);
