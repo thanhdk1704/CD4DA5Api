@@ -28,6 +28,10 @@ namespace BLL
             var kq = isp.GetSPbyID(link);
             if (kq != null) { 
             kq.dsgiaban = isp.GetGiaBans(kq.MaSanPham);
+                foreach(var item in kq.dsgiaban)
+                {
+                    item.revenue = isp.getRevenue(item.MaGB);
+                }
             kq.giahientai = isp.Getgiahientai(kq.MaSanPham);
             kq.kho = isp.Getkhobysp(kq.MaSanPham);
                 kq.danhmuc = isp.getloaibySanPham(kq.MaSanPham);
@@ -68,6 +72,7 @@ namespace BLL
             }
             return kq;
         }
+        //không dùng
         public List<SanPhamModel> xemlichsugia(int pageIndex, int pageSize, out long total)
         {
             var kq = isp.GetSanPhams( pageIndex,  pageSize, out  total);
@@ -202,17 +207,17 @@ namespace BLL
             }
             return kq;
         }
-        public SanPhamModel Create(SanPhamModel spmoi, GiaBanModel gbmoi, KhoModel kho)
+        public SanPhamModel Create(SanPhamModel spmoi)
         {
-            return isp.Create(spmoi,gbmoi,kho);
+            return isp.Create(spmoi);
         }
         public List<KhoModel> ThemKho(KhoModel kho)
         {
             return isp.AddKho(kho);
         }
-        public List<GiaBanModel> ThemGiaBan(string MaSanPham,int Gia)
+        public GiaBanModel ThemGiaBan(GiaBanModel gb)
         {
-            return isp.Addprice(MaSanPham,Gia);
+            return isp.Addprice(gb);
         }
         public int delete(string masp)
         {

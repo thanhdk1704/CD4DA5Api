@@ -286,7 +286,7 @@ namespace DAL
                 throw ex;
             }
         }
-        public SanPhamModel Create(SanPhamModel spmoi,GiaBanModel gbmoi,KhoModel kho)
+        public SanPhamModel Create(SanPhamModel spmoi)
         {
             string msgError = "";
             try
@@ -298,10 +298,10 @@ namespace DAL
                             "@GhiChu", spmoi.GhiChu,
                             "@Link", spmoi.Link,
                             "@anh",spmoi.Anh,
-                             "@mashop",kho.MaShop,
-                                "@soluong",kho.SoLuong,
-                                "@gianhap",kho.GiaNhap,
-                                    "@giaban",gbmoi.Gia);
+                             "@mashop",spmoi.kho.MaShop,
+                                "@soluong", spmoi.kho.SoLuong,
+                                "@gianhap", spmoi.kho.GiaNhap,
+                                    "@giaban", spmoi.giahientai.Gia);
                 if (!string.IsNullOrEmpty(msgError))
                     throw new Exception(msgError);
                 return dt.ConvertTo<SanPhamModel>().FirstOrDefault();
@@ -312,17 +312,17 @@ namespace DAL
                 throw ex;
             }
         }
-        public List<GiaBanModel> Addprice(string MaSanPham ,int Gia)
+        public GiaBanModel Addprice(GiaBanModel gb)
         {
             string msgError = "";
             try
             {
                 var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "themgiaban",
-                          "@MaSanPham", MaSanPham,
-                         "@Gia", Gia);
+                          "@MaSanPham", gb.MaSanPham,
+                         "@Gia", gb.Gia);
                 if (!string.IsNullOrEmpty(msgError))
                     throw new Exception(msgError);
-                return dt.ConvertTo<GiaBanModel>().ToList();
+                return dt.ConvertTo<GiaBanModel>().FirstOrDefault();
 
             }
             catch (Exception ex)
@@ -351,6 +351,25 @@ namespace DAL
         }
         public void update() { 
 
+        }
+        public int getRevenue(string magb)
+        {
+            int kq = 0;
+            string msgError = "";
+            try
+            {
+                var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "getRevenueByPrice",
+                          "@magb", magb);
+                if (!string.IsNullOrEmpty(msgError))
+                    throw new Exception(msgError);
+                if (dt.Rows.Count > 0 && dt.Rows[0]["Revenue"] != DBNull.Value) kq = (int)dt.Rows[0]["Revenue"];
+                return kq;
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
         public int Delete(string masp)
         {

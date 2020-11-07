@@ -13,5 +13,6 @@ namespace Model
       public int Gia {get;set;}
       public DateTime? NgayBD {get;set;}
       public DateTime? NgayKT {get;set;}
+        public int revenue { get; set; }
     }
 }

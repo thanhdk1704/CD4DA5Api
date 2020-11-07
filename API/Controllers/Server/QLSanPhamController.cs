@@ -153,35 +153,20 @@ namespace API.Controllers.Server
         }
         [Route("them")]
         [HttpPost]
-        public SanPhamModel create( string MaLoai2, string TenSanPham,
-                            string MoTa,
-                           string GhiChu,
-                           string Link,
-                           string Anh,
-                            string MaShop,
-                            int SoLuong,
-                              int GiaNhap,
-                                    int Gia)
+        public SanPhamModel create(SanPhamModel spmoi)
         {
           
-            SanPhamModel spmoi = new SanPhamModel();
-            KhoModel kho = new KhoModel();
-            GiaBanModel gbmoi = new GiaBanModel();
-            spmoi.MaLoai2 = MaLoai2;
-            spmoi.TenSanPham = TenSanPham;
-            spmoi.MoTa = MoTa;
-            spmoi.GhiChu = GhiChu;
-            spmoi.Link = Link;
-            spmoi.Anh = Anh;
-            kho.MaShop = MaShop;
-            kho.SoLuong = SoLuong;
-            
-            kho.GiaNhap = GiaNhap;
-            gbmoi.Gia = Gia;
-            var newpro = isp.Create(spmoi, gbmoi, kho);
+            var newpro = isp.Create(spmoi);
 
             return newpro;
 
+        }
+        [Route("add-price")]
+        [HttpPost]
+        public GiaBanModel Themgia([FromBody] GiaBanModel giaBan)
+        {
+            var kq=isp.ThemGiaBan(giaBan);
+            return kq;
         }
         [Route("update")]
         [HttpPut]

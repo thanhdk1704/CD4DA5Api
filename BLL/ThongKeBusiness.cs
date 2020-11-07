@@ -72,7 +72,14 @@ namespace BLL
             }
             foreach(var item in kq.dshdn)
             {
+                item.Tongdonvi=0;
+                item.Tongchiphi=0;
                 item.chitiet = hdn.GetCtHDN(item.MaHDN);
+                      for (int i = 0; i < item.chitiet.Count; i++)
+                {
+                    item.Tongdonvi += item.chitiet[i].Soluong;
+                    item.Tongchiphi += item.chitiet[i].Soluong * item.chitiet[i].DonGia;
+                }
             }
             foreach (var i in kq.incomebycates)
             {

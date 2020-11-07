@@ -19,9 +19,9 @@ namespace BLL.Interfaces
         List<SanPhamModel> spbyloai1(string link);
         List<SanPhamModel> spbyloai(int pageIndex, int pageSize, string link, out long total);
         List<SanPhamModel> Getspbyshop(int index, int size, string link, out long total);
-        SanPhamModel Create(SanPhamModel spmoi, GiaBanModel gbmoi, KhoModel kho);
+        SanPhamModel Create(SanPhamModel spmoi);
         int delete(string masp);
-        List<GiaBanModel> ThemGiaBan(string MaSanPham, int Gia);
+        GiaBanModel ThemGiaBan(GiaBanModel gb);
         List<KhoModel> ThemKho(KhoModel kho);
         List<SanPhamModel> getspbanchay(string mashop, int thang);
     }
