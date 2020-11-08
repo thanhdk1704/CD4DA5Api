@@ -79,5 +79,12 @@ namespace API.Controllers.Server
         {
             return isp.getxabyhuyen(mahuyen);
         }
+        [Route("them")]
+        [HttpPost]
+        public DonHangModel Them(DonHangModel dh)
+        {
+            var kq = isp.them(dh);
+            return kq;
+        }
     }
 }

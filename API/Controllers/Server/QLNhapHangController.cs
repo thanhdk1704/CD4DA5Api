@@ -40,5 +40,13 @@ namespace API.Controllers.Server
         {
             return ihdn.getbyhdn(mahdn);
         }
+        [Route("them")]
+        [HttpPost]
+        public HoaDonNhapModel them(HoaDonNhapModel hdn)
+        {
+            var kq = ihdn.Them(hdn);
+            return kq;
+        }
+
     }
 }

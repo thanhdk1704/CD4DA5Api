@@ -99,5 +99,11 @@ namespace BLL
         {
             return isp.getxabyhuyen(mahuyen);
         }
+        public DonHangModel them(DonHangModel dh)
+        {
+
+            
+            return isp.Them(dh);
+        }
     }
 }

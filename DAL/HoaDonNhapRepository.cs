@@ -66,6 +66,26 @@ namespace DAL
                 throw ex;
             }
         }
-        
+        public HoaDonNhapModel Them(HoaDonNhapModel hdn)
+        {
+
+            string msgError = "";
+            try
+            {
+                var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "themhdn",
+                    "@mancc", hdn.MaNCC,
+                    "@mashop",hdn.MaShop,
+                    "@chitiet",hdn.chitiet);
+                if (!string.IsNullOrEmpty(msgError))
+                    throw new Exception(msgError);
+
+                return dt.ConvertTo<HoaDonNhapModel>().FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
     }
 }

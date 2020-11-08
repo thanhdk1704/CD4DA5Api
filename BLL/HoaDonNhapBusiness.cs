@@ -49,5 +49,9 @@ namespace BLL
         {
             return _res.GetCtHDN(mahdn);
         }
+        public HoaDonNhapModel Them(HoaDonNhapModel hdn)
+        {
+            return _res.Them(hdn);
+        }
     }
 }

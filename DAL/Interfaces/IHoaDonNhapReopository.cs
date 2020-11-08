@@ -10,5 +10,6 @@ namespace DAL.Interfaces
         List<ChiTietHoaDonNhapModel> GetCtHDN(string mahdn);
         HoaDonNhapModel GetHDNbyID(string mahdn);
         List<HoaDonNhapModel> GetHDNbyShop(string mashop, int page_index, int page_size, out long total);
+        HoaDonNhapModel Them(HoaDonNhapModel hdn);
     }
 }

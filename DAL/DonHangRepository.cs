@@ -65,6 +65,27 @@ namespace DAL
                 throw ex;
             }
         }
+        public DonHangModel Them(DonHangModel dh)
+        {
+            string msgError = "";
+            try
+            {
+                var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "themdonhang",
+                    "@MaKH",dh.MaKH,
+                    "@MaShop",dh.MaShop,
+                    "@ThanhToan",dh.ThanhToan,
+                    "@MaDiaChi",dh.MaDiaChi,
+                    "@chitiet",dh.chitiet
+                    );
+                if (!string.IsNullOrEmpty(msgError))
+                    throw new Exception(msgError);
+                return dt.ConvertTo<DonHangModel>().FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
         public List<ChiTietDonHangModel> getctbymadonhang(string madon)
         {
             string msgError = "";
