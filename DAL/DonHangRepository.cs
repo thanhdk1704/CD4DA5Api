@@ -75,7 +75,7 @@ namespace DAL
                     "@MaShop",dh.MaShop,
                     "@ThanhToan",dh.ThanhToan,
                     "@MaDiaChi",dh.MaDiaChi,
-                    "@chitiet",dh.chitiet
+                    "@chitiet",dh.chitiet != null ? MessageConvert.SerializeObject(dh.chitiet) : null
                     );
                 if (!string.IsNullOrEmpty(msgError))
                     throw new Exception(msgError);

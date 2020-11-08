@@ -42,10 +42,17 @@ namespace API.Controllers.Server
         }
         [Route("them")]
         [HttpPost]
-        public HoaDonNhapModel them(HoaDonNhapModel hdn)
+        public HoaDonNhapModel them([FromBody] HoaDonNhapModel hdn)
         {
             var kq = ihdn.Them(hdn);
+            
             return kq;
+        }
+        [Route("get-all-ncc")]
+        
+        public List<NhaCungCapModel> GetAllNCC()
+        {
+            return ihdn.GetAllNCC();
         }
 
     }

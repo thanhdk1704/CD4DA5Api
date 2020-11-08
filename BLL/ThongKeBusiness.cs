@@ -14,11 +14,11 @@ namespace BLL
         private ISanPhamRepository sp;
         private IThongKeRepository tk;
         private IDonHangRepository dh;
-        private IHoaDonNhapReopository hdn;
+        private IHoaDonNhapRepository hdn;
         private IKhachHangRepository kh;
         
 
-        public ThongKeBusiness(ILoaiRepository l, ISanPhamRepository sp, IThongKeRepository tk,IDonHangRepository dh, IHoaDonNhapReopository hdn, IKhachHangRepository kh)
+        public ThongKeBusiness(ILoaiRepository l, ISanPhamRepository sp, IThongKeRepository tk,IDonHangRepository dh, IHoaDonNhapRepository hdn, IKhachHangRepository kh)
         {
             this.l = l;
             this.sp = sp;

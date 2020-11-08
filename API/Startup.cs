@@ -82,7 +82,7 @@ namespace API
             services.AddTransient<IDonHangBusiness, DonHangBusiness>();
             services.AddTransient<IThongKeRepository, ThongKeRepository>();
             services.AddTransient<IThongKeBusiness, ThongKeBusiness>();
-            services.AddTransient<IHoaDonNhapReopository, HoaDonNhapRepository>();
+            services.AddTransient<IHoaDonNhapRepository, HoaDonNhapRepository>();
             services.AddTransient<IHoaDonNhapBusiness, HoaDonNhapBusiness>();
 
         }

@@ -8,7 +8,7 @@ using System.Text;
 
 namespace DAL
 {
-    public partial class HoaDonNhapRepository:IHoaDonNhapReopository
+    public partial class HoaDonNhapRepository:IHoaDonNhapRepository
     {
         private IDatabaseHelper _dbHelper;
         public HoaDonNhapRepository(IDatabaseHelper dbHelper)
@@ -66,6 +66,42 @@ namespace DAL
                 throw ex;
             }
         }
+        public List<NhaCungCapModel> AllNCC()
+        {
+            
+                string msgError = "";
+                try
+                {
+                    var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "getncc");
+                    if (!string.IsNullOrEmpty(msgError))
+                        throw new Exception(msgError);
+
+                    return dt.ConvertTo<NhaCungCapModel>().ToList();
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            
+        }
+        public NhaCungCapModel GetNCCByHDN(string mahdn)
+        {
+            string msgError = "";
+            try
+            {
+                var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "getnccbyhdn","mahdn",mahdn);
+                if (!string.IsNullOrEmpty(msgError))
+                    throw new Exception(msgError);
+
+                return dt.ConvertTo<NhaCungCapModel>().FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+        }
+
         public HoaDonNhapModel Them(HoaDonNhapModel hdn)
         {
 
@@ -75,11 +111,31 @@ namespace DAL
                 var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "themhdn",
                     "@mancc", hdn.MaNCC,
                     "@mashop",hdn.MaShop,
-                    "@chitiet",hdn.chitiet);
+                    "@chitiet",hdn.chitiet != null ? MessageConvert.SerializeObject(hdn.chitiet) : null);
                 if (!string.IsNullOrEmpty(msgError))
                     throw new Exception(msgError);
 
                 return dt.ConvertTo<HoaDonNhapModel>().FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public KhoModel TangSLSP(string masp,int soluong)
+        {
+
+            string msgError = "";
+            try
+            {
+                var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "tangslsp",
+                    "@masp", masp,
+                    "@soluong", soluong
+                   );
+                if (!string.IsNullOrEmpty(msgError))
+                    throw new Exception(msgError);
+
+                return dt.ConvertTo<KhoModel>().FirstOrDefault();
             }
             catch (Exception ex)
             {
