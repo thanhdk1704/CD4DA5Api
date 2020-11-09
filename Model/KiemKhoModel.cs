@@ -9,5 +9,6 @@ namespace Model
         public string MaKiemKho{get;set;}
       public string MaShop{get;set;}
       public string ngaykiemkho{get;set;}
+        public List<ChiTietKiemKhoModel> chitiet { get; set; }
     }
 }

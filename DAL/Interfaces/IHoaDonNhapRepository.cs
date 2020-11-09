@@ -14,6 +14,7 @@ namespace DAL.Interfaces
         List<HoaDonNhapModel> GetHDNbyShop(string mashop, int page_index, int page_size, out long total);
         
         NhaCungCapModel GetNCCByHDN(string mahdn);
+       
         KhoModel TangSLSP(string masp, int soluong);
         HoaDonNhapModel Them(HoaDonNhapModel hdn);
     }

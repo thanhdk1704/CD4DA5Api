@@ -84,6 +84,7 @@ namespace DAL
                 }
             
         }
+       
         public NhaCungCapModel GetNCCByHDN(string mahdn)
         {
             string msgError = "";

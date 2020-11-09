@@ -14,5 +14,6 @@ namespace Model
       public string MoTa{get;set;}
       public string GhiChu{get;set;}
       public string Link{get;set;}
+        public int value { get; set; }
     }
 }

@@ -84,6 +84,8 @@ namespace API
             services.AddTransient<IThongKeBusiness, ThongKeBusiness>();
             services.AddTransient<IHoaDonNhapRepository, HoaDonNhapRepository>();
             services.AddTransient<IHoaDonNhapBusiness, HoaDonNhapBusiness>();
+            services.AddTransient<INhaCungCapRepository, NhaCungCapRepository>();
+            services.AddTransient<INhaCungCapBusiness, NhaCungCapBusiness>();
 
         }
 

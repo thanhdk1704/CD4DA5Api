@@ -65,5 +65,6 @@ namespace BLL
         {
             return _res.AllNCC();
         }
+        
     }
 }
