@@ -50,6 +50,23 @@ namespace DAL
                 throw ex;
             }
         }
+        public List<DonHangModel> GetDonHangByKhachHang(string makh, int page_index, int page_size, out long total)
+        {
+            total = 0;
+            string msgError = "";
+            try
+            {
+                var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "getdhbykhachhang", "@makh", makh, "@page_index", page_index, "@page_size", page_size);
+                if (!string.IsNullOrEmpty(msgError))
+                    throw new Exception(msgError);
+                if (dt.Rows.Count > 0) total = (long)dt.Rows[0]["RecordCount"];
+                return dt.ConvertTo<DonHangModel>().ToList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
         public DonHangModel Getbyid(string madon)
         {
             string msgError = "";
@@ -75,7 +92,14 @@ namespace DAL
                     "@MaShop",dh.MaShop,
                     "@ThanhToan",dh.ThanhToan,
                     "@MaDiaChi",dh.MaDiaChi,
-                    "@chitiet",dh.chitiet != null ? MessageConvert.SerializeObject(dh.chitiet) : null
+                    "@chitiet",dh.chitiet != null ? MessageConvert.SerializeObject(dh.chitiet) : null,
+                    "@TenKh",dh.TenKH,
+                    "@Email",dh.Email, 
+                    "@SoDienThoai",dh.SoDienThoai,
+                     "@Xa",dh.Xa,
+                     "@Huyen",dh.Huyen,
+                     "@Tinh",dh.Tinh,
+                     "@DCChiTiet",dh.DCChitiet
                     );
                 if (!string.IsNullOrEmpty(msgError))
                     throw new Exception(msgError);

@@ -51,6 +51,23 @@ namespace DAL
                 throw ex;
             }
         }
+        public KhachHangModel DangNhap(string tendn, string mk,string email)
+        {
+            string msgError = "";
+            try
+            {
+                var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "dangnhap", "@TenTK", tendn,
+                    "@Mk",mk, "@Email",email
+                    );
+                if (!string.IsNullOrEmpty(msgError))
+                    throw new Exception(msgError);
+                return dt.ConvertTo<KhachHangModel>().ToList().FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
         public DiaChiModel Getdcbyid(int id)
         {
             string msgError = "";

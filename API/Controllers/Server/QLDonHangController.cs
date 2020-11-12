@@ -34,6 +34,20 @@ namespace API.Controllers.Server
             
 
         }
+        [Route("get-by-kh/{makh}/{pageIndex}/{pageSize}")]
+        public ResponseModel GetOdersbyCus(string makh, int pageIndex, int pageSize)
+        {
+            long total = 0;
+
+            var orders = new ResponseModel();
+            orders.Page = pageIndex;
+            orders.PageSize = pageSize;
+            orders.Data = isp.GetOdersByKH(makh, pageIndex, pageSize, out total);
+            orders.TotalItems = total;
+            return orders;
+
+
+        }
         [Route("getbystt/{mashop}/{trangthai}/{pageIndex}/{pageSize}")]
         public ResponseModel GetOdersbySTT(string mashop,int trangthai,int pageIndex, int pageSize)
         {

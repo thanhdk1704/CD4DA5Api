@@ -31,11 +31,63 @@ namespace BLL
                         item.TongDonVi += item.chitiet[i].SoLuong;
                     }
                 }
-                item.thongtinkh = isp2.getbyid(item.MaKH);
+                if (item.MaKH != null) { 
+                item.thongtinkh = isp2.getbyid(item.MaKH);}
+                else
+                {
+                    continue;
+                }
+                if (item.MaDiaChi!=0) {
                 item.diachinhanhang = isp2.Getdcbyid(item.MaDiaChi);
                 item.diachinhanhang.tttinh = isp2.GetTinh(item.diachinhanhang.Tinh);
                 item.diachinhanhang.tthuyen = isp2.GetHuyen(item.diachinhanhang.Huyen);
                 item.diachinhanhang.ttxa = isp2.GetXa(item.diachinhanhang.Xa);
+                }
+                else { item.diachinhanhang.tttinh = isp2.GetTinh(item.Tinh);
+                    item.diachinhanhang.ttxa = isp2.GetXa(item.Xa);
+                    item.diachinhanhang.tthuyen = isp2.GetHuyen(item.Huyen);
+                    item.diachinhanhang.ChiTiet = item.DCChitiet;
+                }
+            }
+            return kq;
+        }
+        public List<DonHangModel> GetOdersByKH(string makh, int pageIndex, int pageSize, out long total)
+        {
+            var kq = isp.GetDonHangByKhachHang(makh, pageIndex, pageSize, out total);
+            foreach (var item in kq)
+            {
+                item.Tonggiatri = 0;
+                item.TongDonVi = 0;
+                item.chitiet = isp.getctbymadonhang(item.MaDH);
+                {
+                    for (int i = 0; i < item.chitiet.Count; i++)
+                    {
+                        item.Tonggiatri += item.chitiet[i].DonGia * item.chitiet[i].SoLuong;
+                        item.TongDonVi += item.chitiet[i].SoLuong;
+                    }
+                }
+                if (item.MaKH != null)
+                {
+                    item.thongtinkh = isp2.getbyid(item.MaKH);
+                }
+                else
+                {
+                    continue;
+                }
+                if (item.MaDiaChi != 0)
+                {
+                    item.diachinhanhang = isp2.Getdcbyid(item.MaDiaChi);
+                    item.diachinhanhang.tttinh = isp2.GetTinh(item.diachinhanhang.Tinh);
+                    item.diachinhanhang.tthuyen = isp2.GetHuyen(item.diachinhanhang.Huyen);
+                    item.diachinhanhang.ttxa = isp2.GetXa(item.diachinhanhang.Xa);
+                }
+                else
+                {
+                    item.diachinhanhang.tttinh = isp2.GetTinh(item.Tinh);
+                    item.diachinhanhang.ttxa = isp2.GetXa(item.Xa);
+                    item.diachinhanhang.tthuyen = isp2.GetHuyen(item.Huyen);
+                    item.diachinhanhang.ChiTiet = item.DCChitiet;
+                }
             }
             return kq;
         }
@@ -44,19 +96,40 @@ namespace BLL
             var kq = isp.GetDonHangByTrangThai(mashop, trangthai,pageIndex, pageSize, out total);
             foreach (var item in kq)
             {
+
                 item.Tonggiatri = 0;
                 item.TongDonVi = 0;
                 item.chitiet = isp.getctbymadonhang(item.MaDH);
-                for (int i = 0; i < item.chitiet.Count; i++)
                 {
-                    item.Tonggiatri += item.chitiet[i].DonGia * item.chitiet[i].SoLuong;
-                    item.TongDonVi += item.chitiet[i].SoLuong;
+                    for (int i = 0; i < item.chitiet.Count; i++)
+                    {
+                        item.Tonggiatri += item.chitiet[i].DonGia * item.chitiet[i].SoLuong;
+                        item.TongDonVi += item.chitiet[i].SoLuong;
+                    }
                 }
-                item.thongtinkh = isp2.getbyid(item.MaKH);
-                item.diachinhanhang = isp2.Getdcbyid(item.MaDiaChi);
-                item.diachinhanhang.tttinh = isp2.GetTinh(item.diachinhanhang.Tinh);
-                item.diachinhanhang.tthuyen = isp2.GetHuyen(item.diachinhanhang.Huyen);
-                item.diachinhanhang.ttxa = isp2.GetXa(item.diachinhanhang.Xa);
+                if (item.MaKH != null)
+                {
+                    item.thongtinkh = isp2.getbyid(item.MaKH);
+                }
+                else
+                {
+                    continue;
+                }
+                if (item.MaDiaChi != 0)
+                {
+                    item.diachinhanhang = isp2.Getdcbyid(item.MaDiaChi);
+                    item.diachinhanhang.tttinh = isp2.GetTinh(item.diachinhanhang.Tinh);
+                    item.diachinhanhang.tthuyen = isp2.GetHuyen(item.diachinhanhang.Huyen);
+                    item.diachinhanhang.ttxa = isp2.GetXa(item.diachinhanhang.Xa);
+                }
+                else
+                {
+                    item.diachinhanhang.tttinh = isp2.GetTinh(item.Tinh);
+                    item.diachinhanhang.tthuyen = isp2.GetHuyen(item.Huyen);
+                    item.diachinhanhang.ttxa = isp2.GetXa(item.Xa);
+                    item.diachinhanhang.ChiTiet = item.DCChitiet;
+                    
+                }
             }
             return kq;
         }
@@ -71,11 +144,29 @@ namespace BLL
                 kq.Tonggiatri += kq.chitiet[i].DonGia * kq.chitiet[i].SoLuong;
                 kq.TongDonVi += kq.chitiet[i].SoLuong;
             }
+            if (kq.MaKH != null)
+            {
                 kq.thongtinkh = isp2.getbyid(kq.MaKH);
+            }
+            else
+            {
+               
+            }
+            if (kq.MaDiaChi != 0)
+            {
                 kq.diachinhanhang = isp2.Getdcbyid(kq.MaDiaChi);
-            kq.diachinhanhang.tttinh = isp2.GetTinh(kq.diachinhanhang.Tinh);
-            kq.diachinhanhang.tthuyen = isp2.GetHuyen(kq.diachinhanhang.Huyen);
-            kq.diachinhanhang.ttxa = isp2.GetXa(kq.diachinhanhang.Xa);
+                kq.diachinhanhang.tttinh = isp2.GetTinh(kq.diachinhanhang.Tinh);
+                kq.diachinhanhang.tthuyen = isp2.GetHuyen(kq.diachinhanhang.Huyen);
+                kq.diachinhanhang.ttxa = isp2.GetXa(kq.diachinhanhang.Xa);
+            }
+            else
+            {
+                kq.diachinhanhang.tttinh = isp2.GetTinh(kq.Tinh);
+                kq.diachinhanhang.tthuyen = isp2.GetHuyen(kq.Huyen);
+                kq.diachinhanhang.ttxa = isp2.GetXa(kq.Xa);
+                kq.diachinhanhang.ChiTiet = kq.DCChitiet;
+
+            }
 
             return kq;
         }

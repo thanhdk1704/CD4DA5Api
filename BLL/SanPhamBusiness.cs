@@ -72,6 +72,23 @@ namespace BLL
             }
             return kq;
         }
+        
+        public List<SanPhamModel> timkiemtheodanhmuc(int maloai,string keyword,int index,int size,out long total)
+        {
+            var kq = isp.timkiemtheodanhmuc(maloai,keyword, index, size, out total);
+            {
+                foreach (var item in kq)
+                {
+                    item.dsgiaban = isp.GetGiaBans(item.MaSanPham);
+                    item.giahientai = isp.Getgiahientai(item.MaSanPham);
+                    item.kho = isp.Getkhobysp(item.MaSanPham);
+                    item.danhmuc = isp.getloaibySanPham(item.MaSanPham);
+                    item.loaicon1 = isp.getloai1bySanPham(item.MaSanPham);
+                    item.loaicon2 = isp.getloai2bySanPham(item.MaSanPham);
+                }
+            }
+            return kq;
+        }
         //không dùng
         public List<SanPhamModel> xemlichsugia(int pageIndex, int pageSize, out long total)
         {
@@ -161,9 +178,9 @@ namespace BLL
             }
             return kq;
         }
-        public List<SanPhamModel> spbyloai1(string link)
+        public List<SanPhamModel> spbyloai1(int pageIndex, int pageSize, string link, out long total)
         {
-            var kq = isp.Getspbyloai1(link);
+            var kq = isp.Getspbyloai1(pageIndex, pageSize, out total,link);
             {
                 foreach (var item in kq)
                 {

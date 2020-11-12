@@ -28,6 +28,12 @@ namespace API.Controllers.Server
             kq.TotalItems = total;
             return kq;
         }
+        [Route("login")]
+        [HttpPost]
+        public KhachHangModel Login([FromBody]TaiKhoanModel acc)
+        {
+            return item.DangNhap(acc.TK, acc.EMK, acc.Email);
+        }
         [Route("{id}")]
         [HttpGet]
         public KhachHangModel getkhachbyid(string id)

@@ -14,5 +14,6 @@ namespace BLL.Interfaces
         public List<KhachHangModel> KhwDiaChi(int index, int size, out long total);
         List<KhachHangModel> Getfulldetails(int index, int size, out long total);
         DiaChiModel ThemDiaChi(DiaChiModel dc);
+        KhachHangModel DangNhap(string tk, string mk, string email);
     }
 }

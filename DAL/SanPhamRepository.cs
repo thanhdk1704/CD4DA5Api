@@ -235,14 +235,16 @@ namespace DAL
                 throw ex;
             }
         }
-        public List<SanPhamModel> Getspbyloai1(string link)
+        public List<SanPhamModel> Getspbyloai1(int index, int size, out long total, string loai1)
         {
+            total = 0;
             string msgError = "";
             try
             {
-                var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "getspbyloai1", "@link", link);
+                var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "getspbyloai1", "@page_index", index, "@page_size", size, "@loai1", loai1);
                 if (!string.IsNullOrEmpty(msgError))
                     throw new Exception(msgError);
+                if (dt.Rows.Count > 0) total = (long)dt.Rows[0]["RecordCount"];
                 return dt.ConvertTo<SanPhamModel>().ToList();
             }
             catch (Exception ex)
@@ -250,14 +252,15 @@ namespace DAL
                 throw ex;
             }
         }
+        
         public List<SanPhamModel> Getspbyloai(int pageIndex, int pageSize, string link, out long total)
         {
             string msgError = "";
             total = 0;
             try
             {
-                var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "getsploai2",
-                    "@page_index", pageIndex, "@page_size", pageSize, "@link", link);
+                var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "getspbyloai",
+                    "@page_index", pageIndex, "@page_size", pageSize, "@loai", link);
                 if (!string.IsNullOrEmpty(msgError))
                     throw new Exception(msgError);
                 if (dt.Rows.Count > 0) total = (long)dt.Rows[0]["RecordCount"];
@@ -276,6 +279,25 @@ namespace DAL
             {
                 var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "getsanphambyshop",
                     "@page_index", pageIndex, "@page_size", pageSize,"@link",link);
+                if (!string.IsNullOrEmpty(msgError))
+                    throw new Exception(msgError);
+                if (dt.Rows.Count > 0) total = (long)dt.Rows[0]["RecordCount"];
+                return dt.ConvertTo<SanPhamModel>().ToList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public List<SanPhamModel> timkiemtheodanhmuc(int ma,string keyword,int index, int size,out long total)
+        {
+            string msgError = "";
+            total = 0;
+            try
+            {
+                var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "Timkemtheodanhmuc",
+                    "@maloai",ma, "@keyword",keyword,
+                    "@page_index", index, "@page_size", size);
                 if (!string.IsNullOrEmpty(msgError))
                     throw new Exception(msgError);
                 if (dt.Rows.Count > 0) total = (long)dt.Rows[0]["RecordCount"];

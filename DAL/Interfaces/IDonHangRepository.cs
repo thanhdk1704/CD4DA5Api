@@ -17,5 +17,6 @@ namespace DAL
         DonHangModel huydon(string madon);
         List<DonHangModel> GetDonHangByTrangThai(string mashop, int trangthai, int page_index, int page_size, out long total);
         DonHangModel Them(DonHangModel dh);
+        List<DonHangModel> GetDonHangByKhachHang(string makh, int page_index, int page_size, out long total);
     }
 }

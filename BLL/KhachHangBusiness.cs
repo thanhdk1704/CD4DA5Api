@@ -19,6 +19,20 @@ namespace BLL
         {
             return _res.GetKh(index,size,out total);
         }
+        public KhachHangModel DangNhap(string tk,string mk,string email)
+        {
+            var kh = _res.DangNhap(tk, mk, email);
+            if (kh!=null) {
+            kh.dsdiachi = _res.GeDiachi(kh.MaKhachHang);
+            foreach (var dc in kh.dsdiachi)
+            {
+                dc.tttinh = _res.GetTinh(dc.Tinh);
+                dc.tthuyen = _res.GetHuyen(dc.Huyen);
+                dc.ttxa = _res.GetXa(dc.Xa);
+            }
+            kh.tk = _res.GetTaiKhoan(kh.MaKhachHang); }
+            return kh;
+        }
         public List<KhachHangModel> KhwDiaChi(int index, int size, out long total)
         {
             var kh = _res.GetKh(index, size, out total);

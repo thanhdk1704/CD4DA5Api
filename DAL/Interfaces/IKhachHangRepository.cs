@@ -16,5 +16,6 @@ namespace DAL
         Wards GetXa(int id);
         DiaChiModel themdiachi(DiaChiModel dc);
         DiaChiModel Getdcbyid(int id);
+        KhachHangModel DangNhap(string tendn, string mk, string email);
     }
 }

@@ -16,5 +16,6 @@ namespace BLL.Interfaces
         DonHangModel GetOdersById(string madon);
         List<DonHangModel> GetOdersByStatus(string mashop, int trangthai, int pageIndex, int pageSize, out long total);
         DonHangModel them(DonHangModel dh);
+        List<DonHangModel> GetOdersByKH(string makh, int pageIndex, int pageSize, out long total);
     }
 }

@@ -21,7 +21,7 @@ namespace DAL
         LoaiModel getloaibySanPham(string masp);
         LoaiCon1Model getloai1bySanPham(string masp);
         LoaiCon2Model getloai2bySanPham(string masp);
-        List<SanPhamModel> Getspbyloai1(string link);
+        List<SanPhamModel> Getspbyloai1(int index, int size, out long total, string loai1);
         List<SanPhamModel> Getspbyloai(int pageIndex, int pageSize, string link, out long total);
         List<SanPhamModel> Getspbyshop(int pageIndex, int pageSize, string link, out long total);
         SanPhamModel Create(SanPhamModel spmoi);
@@ -30,5 +30,7 @@ namespace DAL
         GiaBanModel Addprice(GiaBanModel gb);
         List<ChiTietLuaChonModel> getluachonbysp(string masp);
         int getRevenue(string magb);
+        List<SanPhamModel> timkiemtheodanhmuc(int ma, string keyword, int index, int size, out long total);
+      
     }
 }

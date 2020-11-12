@@ -55,6 +55,19 @@ namespace API.Controllers.Server
         {
             return isp.all( pageIndex,  pageSize, out  total);
         }
+        [Route("tim-kiem-theo-danh-muc/{madanhmuc}/{keyword}/{index}/{size}")]
+        public ResponseModel timkiemtheodanhmuc(int madanhmuc, string keyword,int index,int size)
+        {
+            var response = new ResponseModel();
+            long total = 0;
+            response.Page = index;
+            response.PageSize = size;
+            response.Data = isp.timkiemtheodanhmuc(madanhmuc, keyword, index, size,out  total);
+            response.TotalItems = total;
+            return response;
+
+        }
+
         [Route("ban-chay/{mashop}/{thang}")]
         public IEnumerable<SanPhamModel> GetBanChay(string mashop, int thang)
         {
@@ -127,21 +140,27 @@ namespace API.Controllers.Server
         {
             return isp.SPtuongtu(id);
         }
-        [Route("all-in-loai-1/{id}")]
-        public IEnumerable<SanPhamModel> GetByloai1(string id)
+        [Route("all-in-loai-1/{pageIndex}/{pageSize}/{link}")]
+        public ResponseModel GetByloai1(int pageIndex,int pageSize, string link)
         {
-            return isp.spbyloai1(id);
+            var response = new ResponseModel();
+            long total = 0;
+            response.Page = pageIndex;
+            response.PageSize = pageSize;
+            response.Data =isp.spbyloai1(pageIndex,pageSize,link,out total);
+            response.TotalItems = total;
+            return response;
         }
         [Route("all-in-loai/{pageIndex}/{pageSize}/{link}")]
-        public IEnumerable<SanPhamModel> GetByloai(int pageIndex,int pageSize, string link)
+        public ResponseModel GetByloai(int pageIndex,int pageSize, string link)
         {
+            var response = new ResponseModel();
             long total = 0;
-            var kq = isp.spbyloai(pageIndex, pageSize, link, out total);
-            foreach (var item in kq)
-            {
-                item.Total = total;
-            }
-            return kq;
+            response.Page = pageIndex;
+            response.PageSize = pageSize;
+            response.Data = isp.spbyloai(pageIndex, pageSize, link, out total);
+            response.TotalItems = total;
+            return response;
         }
         [Route("get-by-shop/{index}/{size}/{link}")]
         public IEnumerable<SanPhamModel> getspbyshop(int? index, int? size, string link)
