@@ -7,6 +7,7 @@ namespace BLL.Interfaces
 {
     public interface IThongKeBusiness
     {
-        ThongKeModel ThongkeThang(string mashop, int thang, out int doanhthu);
+        ThongKeModel ThongkeNam(string mashop, int nam);
+        ThongKeModel ThongkeThang(string mashop, int thang);
     }
 }

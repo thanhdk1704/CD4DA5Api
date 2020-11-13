@@ -23,8 +23,14 @@ namespace API.Controllers.Server
         [Route("thang/{mashop}/{thang}")]
         public ThongKeModel thongkethang(string mashop,int thang)
         {
-            int total = 0;
-            return itk.ThongkeThang(mashop, thang,out total);
+            
+            return itk.ThongkeThang(mashop, thang);
+        }
+        [Route("nam/{mashop}/{nam}")]
+        public ThongKeModel thongkenam(string mashop, int nam)
+        {
+
+            return itk.ThongkeNam(mashop, nam);
         }
     }
 }

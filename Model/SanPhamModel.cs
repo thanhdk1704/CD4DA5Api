@@ -26,5 +26,7 @@ namespace Model
         public long? Total { get; set; }
         public List<SPThuocTinhModel> dsthuoctinh { get; set; }
         public List<ChiTietLuaChonModel> dsluachon { get; set; }
+        public int doanhthu { get; set; }
+        public int donvi { get; set; }
     }
 } 
