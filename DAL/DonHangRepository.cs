@@ -87,6 +87,7 @@ namespace DAL
             string msgError = "";
             try
             {
+                
                 var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "themdonhang",
                     "@MaKH",dh.MaKH,
                     "@MaShop",dh.MaShop,

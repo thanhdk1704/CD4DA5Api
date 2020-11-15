@@ -46,6 +46,12 @@ namespace API.Controllers.Server
         {
             return item.GetAddress(id);
         }
+        [Route("dia-chi-by-id/{id}")]
+        [HttpGet]
+        public DiaChiModel Diachibyid(int id)
+        {
+            return item.GetDiaChiByID(id);
+        }
         [Route("dia-chi/{index}/{size}")]
         [HttpGet]
         public ResponseModel KhWDiaChi(int index, int size)
@@ -72,6 +78,20 @@ namespace API.Controllers.Server
             DiaChiModel dcmoi = new DiaChiModel();
             dcmoi = item.ThemDiaChi(dc);
             return dcmoi;
+        }
+        [Route("xoa-dc/{madiachi}")]
+        [HttpGet]
+        public int xoaDiaChi(int madiachi)
+        {
+           
+            return item.xoaDiaChi(madiachi);
+        }
+        [Route("thiet-lap-dc/{madiachi}")]
+        [HttpGet]
+        public int ThietLapDiaChi(int madiachi)
+        {
+
+            return item.ThietLapDiaChi(madiachi);
         }
     }
 }

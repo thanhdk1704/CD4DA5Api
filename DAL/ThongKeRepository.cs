@@ -134,7 +134,7 @@ namespace DAL
 
             try
             {
-                var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "phieunhaptheoshoptheothang", "@mashop", mashop, "@nam", nam);
+                var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "phieunhaptheoshoptheonam", "@mashop", mashop, "@nam", nam);
                 if (!string.IsNullOrEmpty(msgError))
                     throw new Exception(msgError);
 

@@ -9,7 +9,7 @@ namespace Model
     {
         public string MaDH { get; set; }
         public string MaKH { get; set; }
-        public int MaDiaChi { get; set; }
+        public int? MaDiaChi { get; set; }
         public string MaShop { get; set; }
         public string NgayDat { get; set; }
         public int ThanhToan { get; set; }
@@ -22,9 +22,9 @@ namespace Model
         public string TenKH { get; set; }
         public string Email { get; set; }
         public string SoDienThoai { get; set; }
-        public int Tinh { get; set; }
-        public int Huyen { get; set; }
-        public int Xa { get; set; }
+        public int? Tinh { get; set; }
+        public int ?Huyen { get; set; }
+        public int ?Xa { get; set; }
         public string DCChitiet { get; set; }
     }
 }

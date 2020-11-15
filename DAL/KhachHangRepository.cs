@@ -98,6 +98,51 @@ namespace DAL
                 throw ex;
             }
         }
+        public DiaChiModel GeDiachibyid(int id)
+        {
+            string msgError = "";
+            try
+            {
+                var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "getdiachibyid", "@madc", id);
+                if (!string.IsNullOrEmpty(msgError))
+                    throw new Exception(msgError);
+                return dt.ConvertTo<DiaChiModel>().FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+       public int xoaDiachi(int madiachi)
+        {
+            string msgError = "";
+            try
+            {
+                var dt = _dbHelper.ExecuteScalarSProcedure(out msgError, "xoadiachi", "@madiachi", madiachi);
+                if (!string.IsNullOrEmpty(msgError))
+                    throw new Exception(msgError);
+                return Convert.ToInt32(dt);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public int ThietLapDiaChi(int madiachi)
+        {
+            string msgError = "";
+            try
+            {
+                var dt = _dbHelper.ExecuteScalarSProcedure(out msgError, "thietlapdiachi", "@madiachi", madiachi);
+                if (!string.IsNullOrEmpty(msgError))
+                    throw new Exception(msgError);
+                return Convert.ToInt32(dt);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
         public DiaChiModel themdiachi(DiaChiModel dc)
         {
             string msgError = "";

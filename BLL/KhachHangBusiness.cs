@@ -63,7 +63,22 @@ namespace BLL
         }
         public List<DiaChiModel> GetAddress(string id)
         {
-            return _res.GeDiachi(id);
+            var kq= _res.GeDiachi(id);
+            foreach (var dc in kq)
+            {
+                dc.tttinh = _res.GetTinh(dc.Tinh);
+                dc.tthuyen = _res.GetHuyen(dc.Huyen);
+                dc.ttxa = _res.GetXa(dc.Xa);
+            }
+            return kq;
+        }
+        public DiaChiModel GetDiaChiByID(int id)
+        {
+            var dc = _res.Getdcbyid(id);
+            dc.tttinh = _res.GetTinh(dc.Tinh);
+            dc.tthuyen = _res.GetHuyen(dc.Huyen);
+            dc.ttxa = _res.GetXa(dc.Xa);
+            return dc;
         }
         public List<KhachHangModel> Getfulldetails(int index, int size, out long total)
         {
@@ -84,6 +99,14 @@ namespace BLL
         public DiaChiModel ThemDiaChi(DiaChiModel dc)
         {
             return _res.themdiachi(dc);
+        }
+        public int xoaDiaChi(int madiachi)
+        {
+            return _res.xoaDiachi(madiachi);
+        }
+        public int ThietLapDiaChi(int madiachi)
+        {
+            return _res.ThietLapDiaChi(madiachi);
         }
     }
 }

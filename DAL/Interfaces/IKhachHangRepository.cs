@@ -17,5 +17,8 @@ namespace DAL
         DiaChiModel themdiachi(DiaChiModel dc);
         DiaChiModel Getdcbyid(int id);
         KhachHangModel DangNhap(string tendn, string mk, string email);
+        DiaChiModel GeDiachibyid(int id);
+        int xoaDiachi(int madiachi);
+        int ThietLapDiaChi(int madiachi);
     }
 }

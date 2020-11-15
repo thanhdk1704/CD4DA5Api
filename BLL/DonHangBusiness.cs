@@ -35,18 +35,25 @@ namespace BLL
                 item.thongtinkh = isp2.getbyid(item.MaKH);}
                 else
                 {
-                    continue;
+                    item.thongtinkh = new KhachHangModel();
+                    item.thongtinkh.tk = new TaiKhoanModel();
+                    item.thongtinkh.HoTen = item.TenKH;
+                    item.thongtinkh.tk.Email = item.Email;
                 }
-                if (item.MaDiaChi!=0) {
-                item.diachinhanhang = isp2.Getdcbyid(item.MaDiaChi);
+                if (item.MaDiaChi!=null) {
+                item.diachinhanhang = isp2.Getdcbyid(item.MaDiaChi.Value);
                 item.diachinhanhang.tttinh = isp2.GetTinh(item.diachinhanhang.Tinh);
                 item.diachinhanhang.tthuyen = isp2.GetHuyen(item.diachinhanhang.Huyen);
                 item.diachinhanhang.ttxa = isp2.GetXa(item.diachinhanhang.Xa);
                 }
-                else { item.diachinhanhang.tttinh = isp2.GetTinh(item.Tinh);
-                    item.diachinhanhang.ttxa = isp2.GetXa(item.Xa);
-                    item.diachinhanhang.tthuyen = isp2.GetHuyen(item.Huyen);
+                else {
+                    item.diachinhanhang = new DiaChiModel();
+                    item.diachinhanhang.tttinh = isp2.GetTinh(item.Tinh.Value);
+                    item.diachinhanhang.tttinh = isp2.GetTinh(item.Tinh.Value);
+                    item.diachinhanhang.ttxa = isp2.GetXa(item.Xa.Value);
+                    item.diachinhanhang.tthuyen = isp2.GetHuyen(item.Huyen.Value);
                     item.diachinhanhang.ChiTiet = item.DCChitiet;
+                    item.diachinhanhang.SoDienThoai = item.SoDienThoai;
                 }
             }
             return kq;
@@ -72,21 +79,27 @@ namespace BLL
                 }
                 else
                 {
-                    continue;
+                    item.thongtinkh = new KhachHangModel();
+                    item.thongtinkh.tk = new TaiKhoanModel();
+                    item.thongtinkh.HoTen = item.TenKH;
+                    item.thongtinkh.tk.Email = item.Email;
+                    
                 }
-                if (item.MaDiaChi != 0)
+                if (item.MaDiaChi != null)
                 {
-                    item.diachinhanhang = isp2.Getdcbyid(item.MaDiaChi);
+                    item.diachinhanhang = isp2.Getdcbyid(item.MaDiaChi.Value);
                     item.diachinhanhang.tttinh = isp2.GetTinh(item.diachinhanhang.Tinh);
                     item.diachinhanhang.tthuyen = isp2.GetHuyen(item.diachinhanhang.Huyen);
                     item.diachinhanhang.ttxa = isp2.GetXa(item.diachinhanhang.Xa);
                 }
                 else
                 {
-                    item.diachinhanhang.tttinh = isp2.GetTinh(item.Tinh);
-                    item.diachinhanhang.ttxa = isp2.GetXa(item.Xa);
-                    item.diachinhanhang.tthuyen = isp2.GetHuyen(item.Huyen);
+                    item.thongtinkh = new KhachHangModel();
+                    item.diachinhanhang.tttinh = isp2.GetTinh(item.Tinh.Value);
+                    item.diachinhanhang.ttxa = isp2.GetXa(item.Xa.Value);
+                    item.diachinhanhang.tthuyen = isp2.GetHuyen(item.Huyen.Value);
                     item.diachinhanhang.ChiTiet = item.DCChitiet;
+                    item.diachinhanhang.SoDienThoai = item.SoDienThoai;
                 }
             }
             return kq;
@@ -113,22 +126,27 @@ namespace BLL
                 }
                 else
                 {
-                    continue;
+                    item.thongtinkh = new KhachHangModel();
+                    item.thongtinkh.tk = new TaiKhoanModel();
+                    item.thongtinkh.HoTen = item.TenKH;
+                    item.thongtinkh.tk.Email = item.Email;
                 }
-                if (item.MaDiaChi != 0)
+                if (item.MaDiaChi != null)
                 {
-                    item.diachinhanhang = isp2.Getdcbyid(item.MaDiaChi);
+                    item.diachinhanhang = isp2.Getdcbyid(item.MaDiaChi.Value);
                     item.diachinhanhang.tttinh = isp2.GetTinh(item.diachinhanhang.Tinh);
                     item.diachinhanhang.tthuyen = isp2.GetHuyen(item.diachinhanhang.Huyen);
                     item.diachinhanhang.ttxa = isp2.GetXa(item.diachinhanhang.Xa);
                 }
                 else
                 {
-                    item.diachinhanhang.tttinh = isp2.GetTinh(item.Tinh);
-                    item.diachinhanhang.tthuyen = isp2.GetHuyen(item.Huyen);
-                    item.diachinhanhang.ttxa = isp2.GetXa(item.Xa);
+                    item.diachinhanhang = new DiaChiModel();
+                    item.diachinhanhang.tttinh = isp2.GetTinh(item.Tinh.Value);
+                    item.diachinhanhang.ttxa = isp2.GetXa(item.Xa.Value);
+                    item.diachinhanhang.tthuyen = isp2.GetHuyen(item.Huyen.Value);
                     item.diachinhanhang.ChiTiet = item.DCChitiet;
-                    
+                    item.diachinhanhang.SoDienThoai = item.SoDienThoai;
+
                 }
             }
             return kq;
@@ -150,21 +168,26 @@ namespace BLL
             }
             else
             {
-               
+                kq.thongtinkh = new KhachHangModel();
+                kq.thongtinkh.tk = new TaiKhoanModel();
+                kq.thongtinkh.HoTen = kq.TenKH;
+                kq.thongtinkh.tk.Email = kq.Email;
             }
-            if (kq.MaDiaChi != 0)
+            if (kq.MaDiaChi != null)
             {
-                kq.diachinhanhang = isp2.Getdcbyid(kq.MaDiaChi);
+                kq.diachinhanhang = isp2.Getdcbyid(kq.MaDiaChi.Value);
                 kq.diachinhanhang.tttinh = isp2.GetTinh(kq.diachinhanhang.Tinh);
                 kq.diachinhanhang.tthuyen = isp2.GetHuyen(kq.diachinhanhang.Huyen);
                 kq.diachinhanhang.ttxa = isp2.GetXa(kq.diachinhanhang.Xa);
             }
             else
             {
-                kq.diachinhanhang.tttinh = isp2.GetTinh(kq.Tinh);
-                kq.diachinhanhang.tthuyen = isp2.GetHuyen(kq.Huyen);
-                kq.diachinhanhang.ttxa = isp2.GetXa(kq.Xa);
+                kq.diachinhanhang = new DiaChiModel();
+                kq.diachinhanhang.tttinh = isp2.GetTinh(kq.Tinh.Value);
+                kq.diachinhanhang.tthuyen = isp2.GetHuyen(kq.Huyen.Value);
+                kq.diachinhanhang.ttxa = isp2.GetXa(kq.Xa.Value);
                 kq.diachinhanhang.ChiTiet = kq.DCChitiet;
+                kq.diachinhanhang.SoDienThoai = kq.SoDienThoai;
 
             }
 
