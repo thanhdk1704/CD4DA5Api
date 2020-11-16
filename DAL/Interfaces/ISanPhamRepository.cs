@@ -31,6 +31,6 @@ namespace DAL
         List<ChiTietLuaChonModel> getluachonbysp(string masp);
         int getRevenue(string magb);
         List<SanPhamModel> timkiemtheodanhmuc(int ma, string keyword, int index, int size, out long total);
-      
+        List<SanPhamModel> TimkiemTheoShop(int maloai, string maloai1, string maloai2, string keyword, int min, int max, int pageIndex, int pageSize, out long total);
     }
 }

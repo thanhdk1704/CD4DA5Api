@@ -141,6 +141,27 @@ namespace DAL
                 throw ex;
             }
         }
+        public List<SanPhamModel> TimkiemTheoShop(int maloai, string maloai1, string maloai2,
+            string keyword,int min,int max,int pageIndex,int pageSize,out long total)
+        {
+            string msgError = "";
+            total = 0;
+            try
+            {
+                var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "timkiemtheoshop",
+                    "@maloai",maloai,"@maloai1",maloai1,"@maloai2",maloai2,
+                    "@keyword",keyword,"@min",min,"@max",max,
+                    "@page_index", pageIndex, "@page_size", pageSize);
+                if (!string.IsNullOrEmpty(msgError))
+                    throw new Exception(msgError);
+                if (dt.Rows.Count > 0) total = (long)dt.Rows[0]["RecordCount"];
+                return dt.ConvertTo<SanPhamModel>().ToList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
         public List<SanPhamModel> GetByLoai2(int pageIndex, int pageSize, string link, out long total)
         {
             string msgError = "";

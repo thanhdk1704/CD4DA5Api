@@ -26,5 +26,6 @@ namespace BLL.Interfaces
         List<SanPhamModel> getspbanchay(string mashop, int thang);
         List<SanPhamModel> timkiemtheodanhmuc(int maloai, string keyword, int index, int size, out long total);
         List<SanPhamModel> spbyloai1(int pageIndex, int pageSize, string link, out long total);
+        List<SanPhamModel> TimkiemTheoShop(int maloai, string maloai1, string maloai2, string keyword, int min, int max, int pageIndex, int pageSize, out long total);
     }
 }

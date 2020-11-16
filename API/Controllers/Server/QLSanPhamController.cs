@@ -55,9 +55,24 @@ namespace API.Controllers.Server
         {
             return isp.all( pageIndex,  pageSize, out  total);
         }
+        [Route("tim-kiem/{maloai}/{maloai1}/{maloai2}/{keyword}/{min}/{max}/{pageIndex}/{pageSize}")]
+        [HttpGet]
+        public ResponseModel TimkiemTheoShop(int maloai, string maloai1, string maloai2,
+   string keyword, int min, int max, int pageIndex, int pageSize )
+        {
+            var response = new ResponseModel();
+            long total = 0;
+            response.Page = pageIndex;
+            response.PageSize = pageSize;
+            response.Data = isp.TimkiemTheoShop(maloai,maloai1,maloai2,keyword,min,max,pageIndex,pageSize,out total);
+            response.TotalItems = total;
+            return response;
+
+        }
         [Route("tim-kiem-theo-danh-muc/{madanhmuc}/{keyword}/{index}/{size}")]
         public ResponseModel timkiemtheodanhmuc(int madanhmuc, string keyword,int index,int size)
         {
+       
             var response = new ResponseModel();
             long total = 0;
             response.Page = index;
