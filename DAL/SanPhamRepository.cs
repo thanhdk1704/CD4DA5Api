@@ -256,6 +256,7 @@ namespace DAL
                 throw ex;
             }
         }
+        
         public List<SanPhamModel> Getspbyloai1(int index, int size, out long total, string loai1)
         {
             total = 0;
