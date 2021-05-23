@@ -27,6 +27,12 @@ namespace BLL
             this.hdn = hdn;
             this.kh = kh;
         }
+
+        public ThongKeModel BaoCaoCuoiNgay(string maShop)
+        {
+            return tk.BaoCaoCuoiNgay(maShop);
+        }
+
         public ThongKeModel ThongkeThang(string mashop,int thang)
         {int doanhthutheoloai = 0; int chiphitheoloai = 0;
             var kq = new ThongKeModel();

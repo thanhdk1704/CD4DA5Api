@@ -7,7 +7,7 @@ using System.Text;
 
 namespace DAL
 {
-    public class DonHangRepository:IDonHangRepository
+    public class DonHangRepository : IDonHangRepository
     {
 
         private IDatabaseHelper _dbHelper;
@@ -16,13 +16,13 @@ namespace DAL
             _dbHelper = dbHelper;
         }
 
-        public List<DonHangModel> GetDonHangByShop(string mashop, int page_index, int page_size, out long total)
+        public List<DonHangModel> GetDonHangByShop(string mashop, int page_index, int page_size, int ? status, bool ? sortByStatusASC, out long total)
         {
             total = 0;
             string msgError = "";
             try
             {
-                var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "getdhbyshop", "@mashop",mashop, "@page_index", page_index, "@page_size", page_size);
+                var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "getdhbyshop", "@mashop", mashop, "@page_index", page_index, "@page_size", page_size, "@trang_thai", status, "@sortBySttAsc", sortByStatusASC);
                 if (!string.IsNullOrEmpty(msgError))
                     throw new Exception(msgError);
                 if (dt.Rows.Count > 0) total = (long)dt.Rows[0]["RecordCount"];
@@ -87,20 +87,21 @@ namespace DAL
             string msgError = "";
             try
             {
-                
+
                 var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "themdonhang",
-                    "@MaKH",dh.MaKH,
-                    "@MaShop",dh.MaShop,
-                    "@ThanhToan",dh.ThanhToan,
-                    "@MaDiaChi",dh.MaDiaChi,
-                    "@chitiet",dh.chitiet != null ? MessageConvert.SerializeObject(dh.chitiet) : null,
-                    "@TenKh",dh.TenKH,
-                    "@Email",dh.Email, 
-                    "@SoDienThoai",dh.SoDienThoai,
-                     "@Xa",dh.Xa,
-                     "@Huyen",dh.Huyen,
-                     "@Tinh",dh.Tinh,
-                     "@DCChiTiet",dh.DCChitiet
+                    "@MaKH", dh.MaKH,
+                    "@MaShop", dh.MaShop,
+                    "@ThanhToan", dh.ThanhToan,
+                    "@MaDiaChi", dh.MaDiaChi,
+                    "@chitiet", dh.chitiet != null ? MessageConvert.SerializeObject(dh.chitiet) : null,
+                    "@TenKh", dh.TenKH,
+                    "@Email", dh.Email,
+                    "@SoDienThoai", dh.SoDienThoai,
+                     "@Xa", dh.Xa,
+                     "@Huyen", dh.Huyen,
+                     "@Tinh", dh.Tinh,
+                     "@DCChiTiet", dh.DCChitiet,
+                     "@HashedCardInformation", dh.HashedCardInformation
                     );
                 if (!string.IsNullOrEmpty(msgError))
                     throw new Exception(msgError);
@@ -171,7 +172,7 @@ namespace DAL
                 throw ex;
             }
         }
-        public List<Districts> gethuyenbytinh(int matinh) 
+        public List<Districts> gethuyenbytinh(int matinh)
         {
             string msgError = "";
             try

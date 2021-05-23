@@ -14,6 +14,7 @@ namespace Model
         public string NgayDat { get; set; }
         public int ThanhToan { get; set; }
         public int TrangThai { get; set; }
+        public string HashedCardInformation { get; set; }
         public int TongDonVi { get; set; }
         public int Tonggiatri { get; set; }
         public List<ChiTietDonHangModel> chitiet { get; set; }

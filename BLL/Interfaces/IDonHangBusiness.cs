@@ -7,7 +7,7 @@ namespace BLL.Interfaces
 {
     public interface IDonHangBusiness
     {
-        List<DonHangModel> GetOdersByShop(string mashop, int pageIndex, int pageSize, out long total);
+        List<DonHangModel> GetOdersByShop(string mashop, int pageIndex, int pageSize, int? status, bool? sortByStatusASC, out long total);
         List<Provinces> getalltinh();
         List<Districts> gethuyenbytinh(int matinh);
         List<Wards> getxabyhuyen(int mahuyen);

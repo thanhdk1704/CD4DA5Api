@@ -20,6 +20,13 @@ namespace API.Controllers.Server
         {
             this.itk = itk;
         }
+
+        [Route("ngay/{maShop}")]
+        public ThongKeModel BaoCaoCuoiNgay(string maShop)
+        {
+            return itk.BaoCaoCuoiNgay(maShop);
+        }
+
         [Route("thang/{mashop}/{thang}")]
         public ThongKeModel thongkethang(string mashop,int thang)
         {

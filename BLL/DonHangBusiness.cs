@@ -16,9 +16,9 @@ namespace BLL
             this.isp = isp;
             this.isp2 = isp2;
         }
-        public List<DonHangModel> GetOdersByShop(string mashop, int pageIndex, int pageSize, out long total)
+        public List<DonHangModel> GetOdersByShop(string mashop, int pageIndex, int pageSize, int? status, bool ? sortByStatusASC, out long total)
         {
-            var kq= isp.GetDonHangByShop(mashop, pageIndex,  pageSize, out  total);
+            var kq= isp.GetDonHangByShop(mashop, pageIndex,  pageSize, status,sortByStatusASC,out  total);
             foreach(var item in kq)
             {
                 item.Tonggiatri = 0;

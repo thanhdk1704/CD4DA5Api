@@ -24,6 +24,7 @@ namespace API.Controllers.Server
             this.isp = isp;
             _path = configuration["AppSettings:PATH"];
         }
+
         public string WriteFileToAuthAccessFolder(string RelativePathFileName, string base64StringData)
         {
             try
@@ -50,34 +51,51 @@ namespace API.Controllers.Server
             }
             return WriteFileToAuthAccessFolder(RelativePathFileName, dataFromBase64String);
         }
+
+        [Route("search/result/{keyword?}/{shopName?}/{maloai?}/{maloai1?}/{maloai2?}/{min?}/{max?}/{pageIndex?}/{pageSize?}/{lowToHighPrice?}/{newestFirst?}")]
+        [Route("search/result/{min}/{max}")]
+        public ResponseModel TimKiem(string keyword, string shopName, int? maloai, string maloai1, string maloai2,
+    int? min, int? max, int? pageIndex, int? pageSize, bool? lowToHighPrice, bool? newestFirst)
+        {
+            min=min ?? 0;
+            var response = new ResponseModel();
+            long total = 0;
+            response.NullableIndex = pageIndex;
+            response.NullableSize = pageSize;
+            response.Data = isp.TimKiemSanPham(keyword, min, max, shopName, pageIndex, pageSize, maloai, maloai1, maloai2, lowToHighPrice, newestFirst, out total);
+            response.TotalItems = total;
+            return response;
+        }
         [Route("all")]
         public IEnumerable<SanPhamModel> Getall(int pageIndex, int pageSize, out long total)
         {
-            return isp.all( pageIndex,  pageSize, out  total);
+            return isp.all(pageIndex, pageSize, out total);
         }
+
         [Route("tim-kiem/{maloai}/{maloai1}/{maloai2}/{keyword}/{min}/{max}/{pageIndex}/{pageSize}")]
         [HttpGet]
         public ResponseModel TimkiemTheoShop(int maloai, string maloai1, string maloai2,
-   string keyword, int min, int max, int pageIndex, int pageSize )
+   string keyword, int min, int max, int pageIndex, int pageSize)
         {
             var response = new ResponseModel();
             long total = 0;
             response.Page = pageIndex;
             response.PageSize = pageSize;
-            response.Data = isp.TimkiemTheoShop(maloai,maloai1,maloai2,keyword,min,max,pageIndex,pageSize,out total);
+            response.Data = isp.TimkiemTheoShop(maloai, maloai1, maloai2, keyword, min, max, pageIndex, pageSize, out total);
             response.TotalItems = total;
             return response;
 
         }
+
         [Route("tim-kiem-theo-danh-muc/{madanhmuc}/{keyword}/{index}/{size}")]
-        public ResponseModel timkiemtheodanhmuc(int madanhmuc, string keyword,int index,int size)
+        public ResponseModel timkiemtheodanhmuc(int madanhmuc, string keyword, int index, int size)
         {
-       
+
             var response = new ResponseModel();
             long total = 0;
             response.Page = index;
             response.PageSize = size;
-            response.Data = isp.timkiemtheodanhmuc(madanhmuc, keyword, index, size,out  total);
+            response.Data = isp.timkiemtheodanhmuc(madanhmuc, keyword, index, size, out total);
             response.TotalItems = total;
             return response;
 
@@ -86,30 +104,33 @@ namespace API.Controllers.Server
         [Route("ban-chay/{mashop}/{thang}")]
         public IEnumerable<SanPhamModel> GetBanChay(string mashop, int thang)
         {
-            return isp.getspbanchay(mashop,thang);
+            return isp.getspbanchay(mashop, thang);
         }
+
         [Route("detail/{link}")]
         public SanPhamModel Chitietsanpham(string link)
         {
-            
+
             return isp.Chitietsanpham(link); ;
         }
+
         [Route("all-by-shop/{link}/{pageIndex}/{pageSize}")]
-        public ResponseModel getspbyshop(string link,int pageIndex, int pageSize)
+        public ResponseModel getspbyshop(string link, int pageIndex, int pageSize)
         {
             long total;
             var response = new ResponseModel();
             response.Page = pageIndex;
             response.PageSize = pageSize;
-            response.Data= isp.getspbyshop(link,pageIndex,pageSize,out total);
+            response.Data = isp.getspbyshop(link, pageIndex, pageSize, out total);
             response.TotalItems = total;
             return response;
         }
+
         [Route("all-with-details/{pageIndex}/{pageSize}")]
         public List<SanPhamModel> getfulldetails(int pageIndex, int pageSize)
         {
-            long total =0;
-            var kq= isp.getspwithfulldetail( pageIndex,  pageSize, out  total);
+            long total = 0;
+            var kq = isp.getspwithfulldetail(pageIndex, pageSize, out total);
             foreach (var item in kq) item.Total = total;
             return kq;
         }
@@ -135,39 +156,45 @@ namespace API.Controllers.Server
             }
             return response;
         }
+
         [Route("all-in-loai-2/{pageIndex}/{pageSize}/{link}")]
-        public IEnumerable<SanPhamModel> SanPhamtheoloaicon2(int pageIndex,int pageSize,string link)
+        public IEnumerable<SanPhamModel> SanPhamtheoloaicon2(int pageIndex, int pageSize, string link)
         {
             long total = 0;
-            var kq= isp.SanphamtheoLoaiCon2(pageIndex,pageSize,link,out total);
-            foreach(var item in kq)
+            var kq = isp.SanphamtheoLoaiCon2(pageIndex, pageSize, link, out total);
+            foreach (var item in kq)
             {
                 item.Total = total;
             }
             return kq;
         }
+
         [Route("{min}/{max}")]
-        public IEnumerable<SanPhamModel> SanPhamtheoKhoangGia(int min, int max) {
+        public IEnumerable<SanPhamModel> SanPhamtheoKhoangGia(int min, int max)
+        {
             return isp.SPtheoKhoangGia(min, max);
         }
+
         [Route("tuong-tu/{id}")]
         public IEnumerable<SanPhamModel> TuongTu(string id)
         {
             return isp.SPtuongtu(id);
         }
+
         [Route("all-in-loai-1/{pageIndex}/{pageSize}/{link}")]
-        public ResponseModel GetByloai1(int pageIndex,int pageSize, string link)
+        public ResponseModel GetByloai1(int pageIndex, int pageSize, string link)
         {
             var response = new ResponseModel();
             long total = 0;
             response.Page = pageIndex;
             response.PageSize = pageSize;
-            response.Data =isp.spbyloai1(pageIndex,pageSize,link,out total);
+            response.Data = isp.spbyloai1(pageIndex, pageSize, link, out total);
             response.TotalItems = total;
             return response;
         }
+
         [Route("all-in-loai/{pageIndex}/{pageSize}/{link}")]
-        public ResponseModel GetByloai(int pageIndex,int pageSize, string link)
+        public ResponseModel GetByloai(int pageIndex, int pageSize, string link)
         {
             var response = new ResponseModel();
             long total = 0;
@@ -177,37 +204,39 @@ namespace API.Controllers.Server
             response.TotalItems = total;
             return response;
         }
+
         [Route("get-by-shop/{index}/{size}/{link}")]
         public IEnumerable<SanPhamModel> getspbyshop(int? index, int? size, string link)
         {
-            long total=9;
+            long total = 9;
             index = (index < 1 || index == null) ? 1 : index;
             size = (index < 1 || index == null) ? 10 : size;
             return isp.Getspbyshop(index.Value, size.Value, link, out total);
         }
+
         [Route("them")]
         [HttpPost]
         public SanPhamModel create(SanPhamModel spmoi)
         {
-          
             var newpro = isp.Create(spmoi);
-
             return newpro;
-
         }
+
         [Route("add-price")]
         [HttpPost]
         public GiaBanModel Themgia([FromBody] GiaBanModel giaBan)
         {
-            var kq=isp.ThemGiaBan(giaBan);
+            var kq = isp.ThemGiaBan(giaBan);
             return kq;
         }
+
         [Route("update")]
         [HttpPut]
         public void sua(string masp)
         {
 
         }
+
         [Route("xoa/{id}")]
         [HttpGet]
         public int delete(string id)

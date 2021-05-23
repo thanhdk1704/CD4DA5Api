@@ -7,7 +7,7 @@ namespace DAL
 {
     public partial interface IDonHangRepository
     {
-        List<DonHangModel> GetDonHangByShop(string mashop, int page_index, int page_size, out long total);
+        List<DonHangModel> GetDonHangByShop(string mashop, int page_index, int page_size, int ? status, bool ? sortByStatusASC, out long total);
         List<ChiTietDonHangModel> getctbymadonhang(string madon);
         DonHangModel Getbyid(string madon);
         List<Provinces> getalltinh();

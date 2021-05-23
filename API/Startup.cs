@@ -38,7 +38,8 @@ namespace API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddCors(options => {
+            services.AddCors(options =>
+            {
                 options.AddPolicy("AllowAll", builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             });
             var appSettingsSection = Configuration.GetSection("AppSettings");
@@ -78,7 +79,7 @@ namespace API
             services.AddTransient<IKhachHangBusiness, KhachHangBusiness>();
             services.AddTransient<ISanPhamRepository, SanPhamRepository>();
             services.AddTransient<ISanPhamBusiness, SanPhamBusiness>();
-            services.AddTransient<IDonHangRepository,DonHangRepository>();
+            services.AddTransient<IDonHangRepository, DonHangRepository>();
             services.AddTransient<IDonHangBusiness, DonHangBusiness>();
             services.AddTransient<IThongKeRepository, ThongKeRepository>();
             services.AddTransient<IThongKeBusiness, ThongKeBusiness>();
@@ -106,7 +107,14 @@ namespace API
             {
                 endpoints.MapControllers();
             });
-            app.UseHttpsRedirection(); 
+            //app.UseEndpoints(endpoints =>
+            //{
+            //    endpoints.MapControllerRoute(
+            //        name: "search",
+            //        pattern: "api/{controller}/seacrh/result/{keyword}/{shopName}/{maloai}/{maloai1}/{maloai2}/{min}/{max}/{lowToHighPrice}/{newestFirst}/{pageIndex}/{pageSize}",
+            //    defaults: new { controller = "QLSanPham", action = "TimKiem",keyword=para });
+            //      });
+            app.UseHttpsRedirection();
         }
     }
 }

@@ -20,15 +20,15 @@ namespace API.Controllers.Server
         {
             this.isp = isp;
         }
-        [Route("getbyshop/{mashop}/{pageIndex}/{pageSize}")]
-        public ResponseModel GetOdersbyShop(string mashop,int pageIndex, int pageSize)
+        [Route("getbyshop/{mashop}/{pageIndex}/{pageSize}/{status?}/{sortByStatusASC?}")]
+        public ResponseModel GetOdersbyShop(string mashop, int pageIndex, int pageSize, int? status, bool? sortByStatusASC)
         {
             long total = 0;
 
             var orders = new ResponseModel();
             orders.Page = pageIndex;
             orders.PageSize = pageSize;
-            orders.Data = isp.GetOdersByShop(mashop, pageIndex, pageSize,out total);
+            orders.Data = isp.GetOdersByShop(mashop, pageIndex, pageSize,status,sortByStatusASC,out total);
             orders.TotalItems = total;
             return orders;
             

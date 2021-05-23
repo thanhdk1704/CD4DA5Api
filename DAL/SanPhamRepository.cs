@@ -7,7 +7,7 @@ using Model;
 
 namespace DAL
 {
-    public partial class SanPhamRepository:ISanPhamRepository
+    public partial class SanPhamRepository : ISanPhamRepository
     {
         private IDatabaseHelper _dbHelper;
         public SanPhamRepository(IDatabaseHelper dbHelper)
@@ -20,7 +20,7 @@ namespace DAL
             string msgError = "";
             try
             {
-                var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "getsp", "@page_index",page_index,"@page_size",page_size);
+                var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "getsp", "@page_index", page_index, "@page_size", page_size);
                 if (!string.IsNullOrEmpty(msgError))
                     throw new Exception(msgError);
                 if (dt.Rows.Count > 0) total = (long)dt.Rows[0]["RecordCount"];
@@ -37,7 +37,7 @@ namespace DAL
             string msgError = "";
             try
             {
-                var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "getspbyshop", "@linkshop",mashop, "@page_index", pageIndex, "@page_size", pageSize);
+                var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "getspbyshop", "@linkshop", mashop, "@page_index", pageIndex, "@page_size", pageSize);
                 if (!string.IsNullOrEmpty(msgError))
                     throw new Exception(msgError);
                 if (dt.Rows.Count > 0) total = (long)dt.Rows[0]["RecordCount"];
@@ -48,12 +48,12 @@ namespace DAL
                 throw ex;
             }
         }
-        public SanPhamModel GetSPbyID( string link)
+        public SanPhamModel GetSPbyID(string link)
         {
             string msgError = "";
             try
             {
-                var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "getspbylink","@id",link);
+                var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "getspbylink", "@id", link);
                 if (!string.IsNullOrEmpty(msgError))
                     throw new Exception(msgError);
                 return dt.ConvertTo<SanPhamModel>().FirstOrDefault();
@@ -83,7 +83,7 @@ namespace DAL
             string msgError = "";
             try
             {
-                var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "getgiabanbysp", "@masp",masp);
+                var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "getgiabanbysp", "@masp", masp);
                 if (!string.IsNullOrEmpty(msgError))
                     throw new Exception(msgError);
                 return dt.ConvertTo<GiaBanModel>().ToList();
@@ -98,7 +98,7 @@ namespace DAL
             string msgError = "";
             try
             {
-                var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "getgiahientai","@masp",masp);
+                var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "getgiahientai", "@masp", masp);
                 if (!string.IsNullOrEmpty(msgError))
                     throw new Exception(msgError);
                 return dt.ConvertTo<GiaBanModel>().ToList().FirstOrDefault();
@@ -130,27 +130,6 @@ namespace DAL
             try
             {
                 var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "phantrang",
-                    "@page_index",pageIndex, "@page_size",pageSize);
-                if (!string.IsNullOrEmpty(msgError))
-                    throw new Exception(msgError);
-                if (dt.Rows.Count > 0) total = (long)dt.Rows[0]["RecordCount"];
-                return dt.ConvertTo<SanPhamModel>().ToList();
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
-        public List<SanPhamModel> TimkiemTheoShop(int maloai, string maloai1, string maloai2,
-            string keyword,int min,int max,int pageIndex,int pageSize,out long total)
-        {
-            string msgError = "";
-            total = 0;
-            try
-            {
-                var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "timkiemtheoshop",
-                    "@maloai",maloai,"@maloai1",maloai1,"@maloai2",maloai2,
-                    "@keyword",keyword,"@min",min,"@max",max,
                     "@page_index", pageIndex, "@page_size", pageSize);
                 if (!string.IsNullOrEmpty(msgError))
                     throw new Exception(msgError);
@@ -162,6 +141,50 @@ namespace DAL
                 throw ex;
             }
         }
+        public List<SanPhamModel> TimkiemTheoShop(int maloai, string maloai1, string maloai2,
+            string keyword, int min, int max, int pageIndex, int pageSize, out long total)
+        {
+            string msgError = "";
+            total = 0;
+            try
+            {
+                var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "timkiemtheoshop",
+                    "@maloai", maloai, "@maloai1", maloai1, "@maloai2", maloai2,
+                    "@keyword", keyword, "@min", min, "@max", max,
+                    "@page_index", pageIndex, "@page_size", pageSize);
+                if (!string.IsNullOrEmpty(msgError))
+                    throw new Exception(msgError);
+                if (dt.Rows.Count > 0) total = (long)dt.Rows[0]["RecordCount"];
+                return dt.ConvertTo<SanPhamModel>().ToList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public List<SanPhamModel> TimKiemTongQuat(string keyWord, int? minPrice, int? maxPrice, string shopName,
+            int? pageIndex, int? pageSize, int? maLoai, string maLoai1, string maLoai2, bool? lowToHighPrice, bool? newestFirst, out long total)
+        {
+            string msgError = "";
+            total = 0;
+            try
+            {
+                var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "TimKiemSanPham",
+                   "@MaLoai", maLoai, "@MaLoai1", maLoai1, "@MaLoai2", maLoai2,
+                   "@ShopName", shopName, "@KeyWord", keyWord, "@MinPrice", minPrice, "@MaxPrice", maxPrice,
+                   "@Index", pageIndex, "@Size", pageSize, "@LowToHighPrice", lowToHighPrice, "@NewestFirst", newestFirst);
+
+                if (!string.IsNullOrEmpty(msgError))
+                    throw new Exception(msgError);
+                if (dt.Rows.Count > 0) total = (long)dt.Rows[0]["RecordCount"];
+                return dt.ConvertTo<SanPhamModel>().ToList();
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
         public List<SanPhamModel> GetByLoai2(int pageIndex, int pageSize, string link, out long total)
         {
             string msgError = "";
@@ -170,7 +193,7 @@ namespace DAL
             {
                 var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "getsploai2",
                     "@page_index", pageIndex, "@page_size", pageSize, "@loai2", link);
-                
+
                 if (!string.IsNullOrEmpty(msgError))
                     throw new Exception(msgError);
                 if (dt.Rows.Count > 0) total = (long)dt.Rows[0]["RecordCount"];
@@ -231,7 +254,7 @@ namespace DAL
             string msgError = "";
             try
             {
-                var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "giabantheokhoang", "@min", min,"@max",max);
+                var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "giabantheokhoang", "@min", min, "@max", max);
                 if (!string.IsNullOrEmpty(msgError))
                     throw new Exception(msgError);
                 return dt.ConvertTo<SanPhamModel>().ToList();
@@ -256,7 +279,7 @@ namespace DAL
                 throw ex;
             }
         }
-        
+
         public List<SanPhamModel> Getspbyloai1(int index, int size, out long total, string loai1)
         {
             total = 0;
@@ -274,7 +297,7 @@ namespace DAL
                 throw ex;
             }
         }
-        
+
         public List<SanPhamModel> Getspbyloai(int pageIndex, int pageSize, string link, out long total)
         {
             string msgError = "";
@@ -300,7 +323,7 @@ namespace DAL
             try
             {
                 var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "getsanphambyshop",
-                    "@page_index", pageIndex, "@page_size", pageSize,"@link",link);
+                    "@page_index", pageIndex, "@page_size", pageSize, "@link", link);
                 if (!string.IsNullOrEmpty(msgError))
                     throw new Exception(msgError);
                 if (dt.Rows.Count > 0) total = (long)dt.Rows[0]["RecordCount"];
@@ -311,14 +334,14 @@ namespace DAL
                 throw ex;
             }
         }
-        public List<SanPhamModel> timkiemtheodanhmuc(int ma,string keyword,int index, int size,out long total)
+        public List<SanPhamModel> timkiemtheodanhmuc(int ma, string keyword, int index, int size, out long total)
         {
             string msgError = "";
             total = 0;
             try
             {
                 var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "Timkemtheodanhmuc",
-                    "@maloai",ma, "@keyword",keyword,
+                    "@maloai", ma, "@keyword", keyword,
                     "@page_index", index, "@page_size", size);
                 if (!string.IsNullOrEmpty(msgError))
                     throw new Exception(msgError);
@@ -341,8 +364,8 @@ namespace DAL
                             "@MoTa", spmoi.MoTa,
                             "@GhiChu", spmoi.GhiChu,
                             "@Link", spmoi.Link,
-                            "@anh",spmoi.Anh,
-                             "@mashop",spmoi.kho.MaShop,
+                            "@anh", spmoi.Anh,
+                             "@mashop", spmoi.kho.MaShop,
                                 "@soluong", spmoi.kho.SoLuong,
                                 "@gianhap", spmoi.kho.GiaNhap,
                                     "@giaban", spmoi.giahientai.Gia);
@@ -353,7 +376,7 @@ namespace DAL
             }
             catch (Exception ex)
             {
-                throw ex;
+                return null;
             }
         }
         public GiaBanModel Addprice(GiaBanModel gb)
@@ -381,7 +404,7 @@ namespace DAL
             {
                 var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "themkho",
                           "@MaSanPham", kho.MaSanPham,
-                          "@MaShop",kho.MaShop,"@SoLuong",kho.SoLuong,
+                          "@MaShop", kho.MaShop, "@SoLuong", kho.SoLuong,
                          "@GiaNhap", kho.GiaNhap);
                 if (!string.IsNullOrEmpty(msgError))
                     throw new Exception(msgError);
@@ -393,7 +416,8 @@ namespace DAL
                 throw ex;
             }
         }
-        public void update() { 
+        public void update()
+        {
 
         }
         public int getRevenue(string magb)

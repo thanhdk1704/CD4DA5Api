@@ -32,5 +32,6 @@ namespace DAL
         int getRevenue(string magb);
         List<SanPhamModel> timkiemtheodanhmuc(int ma, string keyword, int index, int size, out long total);
         List<SanPhamModel> TimkiemTheoShop(int maloai, string maloai1, string maloai2, string keyword, int min, int max, int pageIndex, int pageSize, out long total);
+        List<SanPhamModel> TimKiemTongQuat(string keyWord, int? minPrice, int? maxPrice, string shopName, int? pageIndex, int? pageSize, int? maLoai, string maLoai1, string maLoai2, bool? lowToHighPrice, bool? newestFirst, out long total);
     }
 }

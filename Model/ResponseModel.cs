@@ -9,6 +9,8 @@ namespace Model
         public long TotalItems { get; set; }
         public int Page { get; set; }
         public int PageSize { get; set; }
-        public dynamic Data { get; set; } 
+        public int? NullableIndex { get; set; }
+        public int? NullableSize { get; set; }
+        public dynamic Data { get; set; }
     }
 }
