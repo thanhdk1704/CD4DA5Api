@@ -103,7 +103,36 @@ namespace DAL
         //        throw ex;
         //    }
         //}
-        
+        public LoaiModel GetLoaiByID(int MaLoai)
+        {
+            string msgError = "";
+            try
+            {
+                var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "GetLoaiByMa", "@MaLoai", MaLoai);
+                if (!string.IsNullOrEmpty(msgError))
+                    throw new Exception(msgError);
+                return dt.ConvertTo<LoaiModel>().FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
 
+        public LoaiCon1Model GetLoai1ByID(string MaLoai)
+        {
+            string msgError = "";
+            try
+            {
+                var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "GetLoai1ByMa", "@MaLoai", MaLoai);
+                if (!string.IsNullOrEmpty(msgError))
+                    throw new Exception(msgError);
+                return dt.ConvertTo<LoaiCon1Model>().FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

@@ -12,5 +12,7 @@ namespace DAL
         public List<LoaiCon1Model> GetLoai1();
         public List<LoaiCon2Model> GetLoai2();
         public List<LoaiCon2Model> getbyloai1(string id);
+        LoaiCon1Model GetLoai1ByID(string MaLoai);
+        LoaiModel GetLoaiByID(int MaLoai);
     }
 }

@@ -8,7 +8,7 @@ using System.Text;
 
 namespace BLL
 {
-    public class ThongKeBusiness:IThongKeBusiness
+    public class ThongKeBusiness : IThongKeBusiness
     {
         private ILoaiRepository l;
         private ISanPhamRepository sp;
@@ -16,9 +16,9 @@ namespace BLL
         private IDonHangRepository dh;
         private IHoaDonNhapRepository hdn;
         private IKhachHangRepository kh;
-        
 
-        public ThongKeBusiness(ILoaiRepository l, ISanPhamRepository sp, IThongKeRepository tk,IDonHangRepository dh, IHoaDonNhapRepository hdn, IKhachHangRepository kh)
+
+        public ThongKeBusiness(ILoaiRepository l, ISanPhamRepository sp, IThongKeRepository tk, IDonHangRepository dh, IHoaDonNhapRepository hdn, IKhachHangRepository kh)
         {
             this.l = l;
             this.sp = sp;
@@ -33,16 +33,17 @@ namespace BLL
             return tk.BaoCaoCuoiNgay(maShop);
         }
 
-        public ThongKeModel ThongkeThang(string mashop,int thang)
-        {int doanhthutheoloai = 0; int chiphitheoloai = 0;
+        public ThongKeModel ThongkeThang(string mashop, int thang)
+        {
+            int doanhthutheoloai = 0; int chiphitheoloai = 0;
             var kq = new ThongKeModel();
-            kq = tk.TongQuanThang(mashop,thang);
+            kq = tk.TongQuanThang(mashop, thang);
             kq.incomebycates = l.GetDataAll();
             kq.sphethang = tk.Sphethang(mashop);
             kq.spbanchay = tk.Spbanchay(mashop, thang);
-            kq.dsdh = tk.donhangtheothang(mashop,thang);
+            kq.dsdh = tk.donhangtheothang(mashop, thang);
             kq.dshdn = tk.phieunhaptheothang(mashop, thang);
-            foreach(var item in kq.spbanchay)
+            foreach (var item in kq.spbanchay)
             {
                 item.dsgiaban = sp.GetGiaBans(item.MaSanPham);
                 item.giahientai = sp.Getgiahientai(item.MaSanPham);
@@ -60,7 +61,7 @@ namespace BLL
                 item.loaicon1 = sp.getloai1bySanPham(item.MaSanPham);
                 item.loaicon2 = sp.getloai2bySanPham(item.MaSanPham);
             }
-            foreach(var item in kq.dsdh)
+            foreach (var item in kq.dsdh)
             {
                 item.Tonggiatri = 0;
                 item.TongDonVi = 0;
@@ -101,12 +102,12 @@ namespace BLL
                     item.diachinhanhang.SoDienThoai = item.SoDienThoai;
                 }
             }
-            foreach(var item in kq.dshdn)
+            foreach (var item in kq.dshdn)
             {
-                item.Tongdonvi=0;
-                item.Tongchiphi=0;
+                item.Tongdonvi = 0;
+                item.Tongchiphi = 0;
                 item.chitiet = hdn.GetCtHDN(item.MaHDN);
-                      for (int i = 0; i < item.chitiet.Count; i++)
+                for (int i = 0; i < item.chitiet.Count; i++)
                 {
                     item.Tongdonvi += item.chitiet[i].Soluong;
                     item.Tongchiphi += item.chitiet[i].Soluong * item.chitiet[i].DonGia;
@@ -114,8 +115,8 @@ namespace BLL
             }
             foreach (var i in kq.incomebycates)
             {
-                
-                tk.doanhthutheoloaitheothang(mashop, i.MaLoai, thang, out doanhthutheoloai,out chiphitheoloai);
+
+                tk.doanhthutheoloaitheothang(mashop, i.MaLoai, thang, out doanhthutheoloai, out chiphitheoloai);
                 i.income = doanhthutheoloai;
                 i.chiphi = chiphitheoloai;
             }
@@ -207,6 +208,25 @@ namespace BLL
                 tk.doanhthutheoloaitheonam(mashop, i.MaLoai, nam, out doanhthutheoloai, out chiphitheoloai);
                 i.income = doanhthutheoloai;
                 i.chiphi = chiphitheoloai;
+            }
+            return kq;
+        }
+
+        public List<LoaiCon2Model> DoanhThuTheoLoai2(int date, string maShop)
+        {
+            var kq = tk.DoanhThuTheoLoai2(date, maShop);
+            foreach (var item in kq)
+            {
+                if (item != null)
+                {
+                    item.Loai1 = l.GetLoai1ByID(item.MaLoaiCha);
+                    if (item.Loai1 != null)
+                    {
+                        item.Loai = l.GetLoaiByID(item.Loai1.MaLoaiCha);
+                    }
+
+                }
+
             }
             return kq;
         }

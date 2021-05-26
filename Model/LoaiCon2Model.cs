@@ -14,6 +14,9 @@ namespace Model
         public string Link { get; set; }
         public int? Removed { get; set; }
         public int? Displayed { get; set; }
+        public LoaiModel Loai { get; set; }
+        public LoaiCon1Model Loai1 { get; set; }
+        public long? DoanhThu { get; set; }
         public List<SanPhamModel> sptheoloai { get; set; }
     }
 }

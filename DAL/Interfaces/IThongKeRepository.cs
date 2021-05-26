@@ -8,6 +8,7 @@ namespace DAL.Interfaces
     public partial interface IThongKeRepository
     {
         ThongKeModel BaoCaoCuoiNgay(string maShop);
+        List<LoaiCon2Model> DoanhThuTheoLoai2(int dateInput, string maShop);
         void doanhthutheoloaitheonam(string mashop, int maloai, int nam, out int doanhthu, out int chiphi);
         void doanhthutheoloaitheothang(string mashop, int maloai, int thang, out int doanhthu,out int chiphi);
         List<DonHangModel> donhangtheonam(string mashop, int nam);

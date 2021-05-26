@@ -8,6 +8,7 @@ namespace BLL.Interfaces
     public interface IThongKeBusiness
     {
         ThongKeModel BaoCaoCuoiNgay(string maShop);
+        List<LoaiCon2Model> DoanhThuTheoLoai2(int date, string maShop);
         ThongKeModel ThongkeNam(string mashop, int nam);
         ThongKeModel ThongkeThang(string mashop, int thang);
     }

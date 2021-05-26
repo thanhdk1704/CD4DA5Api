@@ -39,5 +39,11 @@ namespace API.Controllers.Server
 
             return itk.ThongkeNam(mashop, nam);
         }
+
+        [Route("doanh-thu-loai/{maShop}/{date}")]
+        public List<LoaiCon2Model> DoanhThuTheoLoai2(string maShop,int date)
+        {
+            return itk.DoanhThuTheoLoai2(date, maShop);
+        }
     }
 }

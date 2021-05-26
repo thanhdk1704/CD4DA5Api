@@ -269,5 +269,48 @@ namespace DAL
                 throw ex;
             }
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="dateInput">thang hoac nam</param>
+        /// <param name="maShop"></param>
+        /// <returns></returns>
+        public List<LoaiCon2Model> DoanhThuTheoLoai2(int dateInput, string maShop)
+        {
+            if (dateInput<=0)
+            {
+                return null;
+            }
+            string procedureName;
+            string parameterName;
+            if (dateInput>12)
+            {
+                procedureName = "DoanhThuTheoNamTheoTungLoai";
+                parameterName = "@nam";
+            }
+
+            else
+            {
+                procedureName = "DoanhThuTheoThangTheoTungLoai";
+                parameterName = "@thang";
+
+            }
+            string msgError = "";
+
+            try
+            {
+                var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, procedureName, parameterName,dateInput,"@mashop", maShop);
+                if (!string.IsNullOrEmpty(msgError))
+                    throw new Exception(msgError);
+
+                var kq = dt.ConvertTo<LoaiCon2Model>().ToList();
+                foreach (var item in kq) { }
+                return kq;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }
