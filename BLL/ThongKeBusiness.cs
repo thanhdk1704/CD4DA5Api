@@ -122,6 +122,98 @@ namespace BLL
             }
             return kq;
         }
+
+        public ThongKeModel ThongkeQuy(string mashop, int quy)
+        {
+            int doanhthutheoloai = 0; int chiphitheoloai = 0;
+            var kq = new ThongKeModel();
+            kq = tk.TongQuanQuy(mashop, quy);
+            kq.incomebycates = l.GetDataAll();
+            kq.sphethang = tk.Sphethang(mashop);
+            kq.spbanchay = tk.Spbanchaytheonam(mashop, quy);
+            kq.dsdh = tk.donhangtheoquy(mashop, quy);
+            kq.dshdn = tk.phieunhaptheoquy(mashop, quy);
+            foreach (var item in kq.spbanchay)
+            {
+                item.dsgiaban = sp.GetGiaBans(item.MaSanPham);
+                item.giahientai = sp.Getgiahientai(item.MaSanPham);
+                item.kho = sp.Getkhobysp(item.MaSanPham);
+                item.danhmuc = sp.getloaibySanPham(item.MaSanPham);
+                item.loaicon1 = sp.getloai1bySanPham(item.MaSanPham);
+                item.loaicon2 = sp.getloai2bySanPham(item.MaSanPham);
+            }
+            foreach (var item in kq.sphethang)
+            {
+                item.dsgiaban = sp.GetGiaBans(item.MaSanPham);
+                item.giahientai = sp.Getgiahientai(item.MaSanPham);
+                item.kho = sp.Getkhobysp(item.MaSanPham);
+                item.danhmuc = sp.getloaibySanPham(item.MaSanPham);
+                item.loaicon1 = sp.getloai1bySanPham(item.MaSanPham);
+                item.loaicon2 = sp.getloai2bySanPham(item.MaSanPham);
+            }
+            foreach (var item in kq.dsdh)
+            {
+                item.Tonggiatri = 0;
+                item.TongDonVi = 0;
+                item.chitiet = dh.getctbymadonhang(item.MaDH);
+                {
+                    for (int i = 0; i < item.chitiet.Count; i++)
+                    {
+                        item.Tonggiatri += item.chitiet[i].DonGia * item.chitiet[i].SoLuong;
+                        item.TongDonVi += item.chitiet[i].SoLuong;
+                    }
+                }
+                if (item.MaKH != null)
+                {
+                    item.thongtinkh = kh.getbyid(item.MaKH);
+                }
+                else
+                {
+                    item.thongtinkh = new KhachHangModel();
+                    item.thongtinkh.tk = new TaiKhoanModel();
+                    item.thongtinkh.HoTen = item.TenKH;
+                    item.thongtinkh.tk.Email = item.Email;
+                }
+                if (item.MaDiaChi != null)
+                {
+                    item.diachinhanhang = kh.Getdcbyid(item.MaDiaChi.Value);
+                    item.diachinhanhang.tttinh = kh.GetTinh(item.diachinhanhang.Tinh);
+                    item.diachinhanhang.tthuyen = kh.GetHuyen(item.diachinhanhang.Huyen);
+                    item.diachinhanhang.ttxa = kh.GetXa(item.diachinhanhang.Xa);
+                }
+                else
+                {
+                    item.diachinhanhang = new DiaChiModel();
+                    item.diachinhanhang.tttinh = kh.GetTinh(item.Tinh.Value);
+                    item.diachinhanhang.tttinh = kh.GetTinh(item.Tinh.Value);
+                    item.diachinhanhang.ttxa = kh.GetXa(item.Xa.Value);
+                    item.diachinhanhang.tthuyen = kh.GetHuyen(item.Huyen.Value);
+                    item.diachinhanhang.ChiTiet = item.DCChitiet;
+                    item.diachinhanhang.SoDienThoai = item.SoDienThoai;
+                }
+            }
+            foreach (var item in kq.dshdn)
+            {
+                item.Tongdonvi = 0;
+                item.Tongchiphi = 0;
+                item.chitiet = hdn.GetCtHDN(item.MaHDN);
+                for (int i = 0; i < item.chitiet.Count; i++)
+                {
+                    item.Tongdonvi += item.chitiet[i].Soluong;
+                    item.Tongchiphi += item.chitiet[i].Soluong * item.chitiet[i].DonGia;
+                }
+            }
+            foreach (var i in kq.incomebycates)
+            {
+
+                tk.doanhthutheoloaitheoquy(mashop, i.MaLoai, quy, out doanhthutheoloai, out chiphitheoloai);
+                i.income = doanhthutheoloai;
+                i.chiphi = chiphitheoloai;
+            }
+            return kq;
+        }
+
+
         public ThongKeModel ThongkeNam(string mashop, int nam)
         {
             int doanhthutheoloai = 0; int chiphitheoloai = 0;
@@ -211,6 +303,7 @@ namespace BLL
             }
             return kq;
         }
+
 
         public List<LoaiCon2Model> DoanhThuTheoLoai2(int date, string maShop)
         {

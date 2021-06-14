@@ -33,6 +33,14 @@ namespace API.Controllers.Server
             
             return itk.ThongkeThang(mashop, thang);
         }
+
+        [Route("quy/{mashop}/{nam}")]
+        public ThongKeModel thongkequy(string mashop, int nam)
+        {
+
+            return itk.ThongkeQuy(mashop, nam);
+        }
+
         [Route("nam/{mashop}/{nam}")]
         public ThongKeModel thongkenam(string mashop, int nam)
         {
