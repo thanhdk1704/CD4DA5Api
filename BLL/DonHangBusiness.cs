@@ -16,6 +16,12 @@ namespace BLL
             this.isp = isp;
             this.isp2 = isp2;
         }
+
+        public List<Bank> GetBanks()
+        {
+            return isp.GetBanks();
+        }
+
         public List<DonHangModel> GetOdersByShop(string mashop, int pageIndex, int pageSize, int? status, bool ? sortByStatusASC, out long total)
         {
             var kq= isp.GetDonHangByShop(mashop, pageIndex,  pageSize, status,sortByStatusASC,out  total);
