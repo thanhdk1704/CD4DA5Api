@@ -33,6 +33,24 @@ namespace DAL
                 throw ex;
             }
         }
+
+        public List<Bank> GetBanks()
+        {
+          
+            string msgError = "";
+            try
+            {
+                var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "GetAllBank" );
+                if (!string.IsNullOrEmpty(msgError))
+                    throw new Exception(msgError);
+                return dt.ConvertTo<Bank>().ToList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public List<DonHangModel> GetDonHangByTrangThai(string mashop, int trangthai, int page_index, int page_size, out long total)
         {
             total = 0;

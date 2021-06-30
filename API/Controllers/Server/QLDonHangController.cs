@@ -20,6 +20,13 @@ namespace API.Controllers.Server
         {
             this.isp = isp;
         }
+
+        [Route("get-all-bank")]
+        public IActionResult GetBank()
+        {
+            return Ok(isp.GetBanks());
+        }
+
         [Route("getbyshop/{mashop}/{pageIndex}/{pageSize}/{status?}/{sortByStatusASC?}")]
         public ResponseModel GetOdersbyShop(string mashop, int pageIndex, int pageSize, int? status, bool? sortByStatusASC)
         {
